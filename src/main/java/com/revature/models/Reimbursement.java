@@ -13,10 +13,10 @@ public class Reimbursement implements Serializable {
 	private Timestamp reimbResolved;
 	private String reimbDescription;
 	private byte[] reimbReceipt;
-	private int reimbAuthor;
-	private int reimbResolver;
-	private int reimbStatusId;
-	private int reimbTypeId;
+	private int reimbAuthor;	//OneToOne with Ers_Users_ID
+	private int reimbResolver;	//OneToOne with Ers_Users_ID
+	private int reimbStatusId;	//connect to reimbursement status table
+	private int reimbTypeId;	//connect to reimbursement type table
 	
 //All arguments constructor
 	public Reimbursement(int reimbId, double reimbAmount, Timestamp reimbSubmitted, Timestamp reimbResolved,

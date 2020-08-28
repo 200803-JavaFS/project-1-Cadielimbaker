@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,8 +20,8 @@ public class UserRoles implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="User_Role_ID")
+	@OneToMany(mappedBy="User_Role_ID",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	
 	private static final long serialVersionUID = 1L;
 	private int userRoleId;
 	
