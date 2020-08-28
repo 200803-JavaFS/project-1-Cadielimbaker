@@ -7,156 +7,94 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import com.revature.models.Users;
 import com.revature.models.LoginDTO;
 import com.revature.models.Reimbursement;
 import com.revature.utilities.ConnectionUtil;
+import com.revature.utilities.HibernateUtil;
 
 public class UsersDAO implements IUsersDAO{
 
-	@Override
+	public Users insert(Users u) {
+		
+		Session ses = HibernateUtil.getSession();
+		
+		Transaction tr = ses.beginTransaction();
+		
+		ses.save(u);
+	
+		tr.commit();	//inserts into the database table
+		//only doing one function so you don't really need this as a transaction
+		
+		return u;
+	}
+
+	public void updateUsers(Users u) {
+	
+		Session ses = HibernateUtil.getSession();
+		
+		ses.merge(u);
+	}
+	
+	public Users selectByUsersId(int usersId) {
+		
+		Session ses = HibernateUtil.getSession();
+		
+		Users u = ses.get(Users.class, usersId);
+		
+		return u;
+	}
+	
+public Users selectByUserRoleId(int userRoleId) {
+		
+		Session ses = HibernateUtil.getSession();
+		
+		Users u = ses.get(Users.class, userRoleId);
+		
+		return u;
+	}
+	
+	public Users selectByUserName(String userName) {
+		
+		Session ses = HibernateUtil.getSession();
+		
+		List<Users> uList = ses.createQuery("FROM Ers_Users WHERE="+userName, Users.class).list();
+		
+		Users u = uList.get(0);	//just lists the first one if there are more than one
+		
+		return u;
+	}
+	
+
+	
+	//public List<Users> selectAll(){
+		
+		//Session ses = HibernateUtil.getSession();
+		
+		//List<Users> uList = ses.createCriteria(Users.class).list();
+		//CriteriaBuilder cbuild = ses.getCriteriaBuilder();
+		//CriteriaQuery<Users> query = cbuild.createQuery(Users.class);
+		
+		
+		//return uList;
+	//}
+	
 	public List<Users> findAllUsers() {
 		
-		try(Connection conn = ConnectionUtil.getConnection()){
-			String sql = "SELECT * FROM Ers_Users;";
-			
-			Statement statement = conn.createStatement();
-			
-			List<Users> list = new ArrayList<>(); 
-			
-			ResultSet result = statement.executeQuery(sql);
-			
-			while(result.next()) {
-				Users u = new Users();
-				
-				u.setUsersId(result.getInt("Ers_Users_ID"));
-				u.setUserName(result.getString("Ers_Username"));
-				u.setPassword(result.getString("Ers_Password"));
-				u.setUserFirstName(result.getString("User_First_Name"));
-				u.setUserLastName(result.getString("User_Last_Name"));
-				u.setUserEmail(result.getString("User_Email"));
-				u.setUserRoleId(result.getInt("User_Role_ID_FK"));
-				
-				list.add(u); 
-			}
-			
-			return list;
-			
-		}catch(SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
-	@Override
-	public Users findByUsersId(int usersId) {
-		try(Connection conn = ConnectionUtil.getConnection()){
-			String sql = "SELECT * FROM Ers_Users WHERE Ers_Users_ID = ?;";
-			
-			PreparedStatement statement = conn.prepareStatement(sql);
-			
-			statement.setInt(1, usersId);
-			
-			ResultSet result = statement.executeQuery();
-			
-			if(result.next()) {
-				
-				Users u = new Users();
-				
-				u.setUsersId(result.getInt("Ers_Users_ID"));
-				u.setUserName(result.getString("Ers_Username"));
-				u.setPassword(result.getString("Ers_Password"));
-				u.setUserFirstName(result.getString("User_First_Name"));
-				u.setUserLastName(result.getString("User_Last_Name"));
-				u.setUserEmail(result.getString("User_Email"));
-				u.setUserRoleId(result.getInt("User_Role_ID_FK"));
-				
-				return(u); 
-				
-			} else {
-				//good place to log a failed query.
-				System.out.println("No user Id found: incorrect user Id entered or need to create a new user profile");
-				return null;
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public boolean addUsers(Users u) {
-		
-		try(Connection conn = ConnectionUtil.getConnection()){
-			
-			String sql = "INSERT INTO Ers_Users (Ers_username, Ers_Password, User_First_Name, User_Last_Name, User_Email, User_Role_ID_FK )"
-					+ "VALUES (?, ?, ?, ?, ?, ?);"; 
-		
-			
-			PreparedStatement statement = conn.prepareStatement(sql);
-			
-			int index = 0;
-			
-			statement.setString(++index, u.getUserName());
-			statement.setString(++index, u.getPassword());
-			statement.setString(++index, u.getUserFirstName());
-			statement.setString(++index, u.getUserLastName());
-			statement.setString(++index, u.getUserEmail());
-			statement.setInt(++index, u.getUserRoleId());
-			
-			statement.execute();
-			return true; 
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
+		Session ses = HibernateUtil.getSession();
+		List<Users> uList = ses.createQuery("FROM Ers_Users").list();
+		return uList;
 	}
 	
-	@Override
-	public boolean updateUsers(Users u) {
-		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "UPDATE Ers_Users SET Ers_username = ?, Ers_Password = ?, User_First_Name = ?, User_Last_Name = ?, User_Email = ?  WHERE Ers_Users_Id = ?;";
-			
-			PreparedStatement statement = conn.prepareStatement(sql);
-
-			int index = 0;
-			
-			statement.setString(++index, u.getUserName());
-			statement.setString(++index, u.getPassword());
-			statement.setString(++index, u.getUserFirstName());
-			statement.setString(++index, u.getUserLastName());
-			statement.setString(++index, u.getUserEmail());
-			
-			statement.execute();
-			return true;
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
-
-	//Bank's normally do not delete information, but I have added this method just in case
-	@Override
-	public boolean deleteUsers(int UsersId) {
-		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "DELETE FROM Users WHERE Id =" + Id + ";";
-
-			Statement statement = conn.createStatement();
-
-			statement.execute(sql);
-			return true;
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 	
+
+
 	@Override
 	public Users login(LoginDTO l) {
 		
@@ -195,5 +133,6 @@ public class UsersDAO implements IUsersDAO{
 		}
 		return u;
 	}
+
 }
-}
+

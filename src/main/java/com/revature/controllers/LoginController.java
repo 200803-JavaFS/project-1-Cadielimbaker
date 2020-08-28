@@ -61,7 +61,7 @@ public class LoginController {
 			LoginDTO l = (LoginDTO) ses.getAttribute("user");
 			ses.invalidate();
 			res.setStatus(200);
-			res.getWriter().println(l.username + " has logged out successfully");
+			res.getWriter().println(l.userName + " has logged out successfully");
 		} else {
 			res.setStatus(400);
 			res.getWriter().println("You must be logged in to logout!");

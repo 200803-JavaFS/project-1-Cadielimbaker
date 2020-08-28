@@ -11,14 +11,14 @@ public interface IUsersDAO {
 	
 	public List<Users> findAllUsers();
 	
-	public Users findByUsersId(int usersId);
+	public Users selectByUsersId(int usersId);
 	
-	public boolean addUsers(Users u);
+	public Users insert(Users u);
 	
-	public boolean updateUsers(Users u); 
+	public void updateUsers(Users u); 
 	
-	//typically Banks do not delete information, but I included it here just in case
-	public boolean deleteUsers(int usersId);
+	public Users selectByUserName(String userName);
+	
 }
 
 //need to have a method to view user role (maybe findByUserRoleId)

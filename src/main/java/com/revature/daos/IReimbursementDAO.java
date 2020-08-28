@@ -2,8 +2,8 @@ package com.revature.daos;
 
 public interface IReimbursementDAO {
 
-	boolean updateReimbursementStatus(String reimbStatus, int reimbStatusId);
+	public void updateReimbursementStatus(String reimbStatus, int reimbStatusId);
 
-	boolean updateReimbursementType(String reimbType, int reimbTypeId);
+	public void updateReimbursementType(String reimbType, int reimbTypeId);
 
 }

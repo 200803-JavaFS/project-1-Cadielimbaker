@@ -2,10 +2,29 @@ package com.revature.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Ers_User_Roles")
 public class UserRoles implements Serializable {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="User_Role_ID")
 	private static final long serialVersionUID = 1L;
 	private int userRoleId;
+	
+	
 	private String userRole;
 	
 //This is an all arguments constructor	

@@ -1,18 +1,47 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import java.io.Serializable;
 //import java.util.ArrayList;
 //import java.util.Arrays;
 
+@Entity
+@Table(name="Ers_Users")
 public class Users implements Serializable {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="Ers_Users_ID")
 	private static final long serialVersionUID = 1L;
 	private int usersId;
-	private String userName;
-	private String password;
+	
+	@Column(name="Ers_Username")
+	private static String userName;
+	
+	@Column(name="User_Password")
+	private static String password;
+	
+	@Column(name="User_First_Name")
 	private String userFirstName;
+	
+	@Column(name="User_Last_Name")
 	private String userLastName;
+	
+	@Column(name="User_Email")
 	private String userEmail;
+	
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="User_Role_ID_FK")
 	private int userRoleId;
 	
 	
@@ -73,7 +102,7 @@ public class Users implements Serializable {
 	}
 	
 	
-	public String getUserName() {
+	public static String getUserName() {
 		return userName;
 	}
 	
@@ -83,7 +112,7 @@ public class Users implements Serializable {
 	}
 	
 	
-	public String getPassword() {
+	public static String getPassword() {
 		return password;
 	}
 	
