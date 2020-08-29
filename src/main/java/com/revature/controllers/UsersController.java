@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.models.UserRoles;
 import com.revature.models.Users;
 import com.revature.services.UsersService;
 
@@ -28,9 +29,20 @@ public class UsersController {
 		
 	}
 	
+	public void getUserRole(HttpServletResponse res, int userRoleId) throws IOException {
+		UserRoles ur = us.findByUserRoleId(userRoleId);
+		if(ur == null) {
+			res.setStatus(204);
+		} else {
+			res.setStatus(200);
+			String json = om.writeValueAsString(ur);
+			res.getWriter().println(json);
+		}
+		
+	}
 	public void getAllUsers(HttpServletResponse res) throws IOException {
 		List<Users> all = us.findAllUsers();
-		res.getWriter().println(om.writeValueAsString(all));
+		res.getWriter().println(om.writeValueAsString(all)); //in one line
 		res.setStatus(200);
 	}
 
@@ -54,7 +66,7 @@ public class UsersController {
 		
 		System.out.println(u);
 		
-		if (us.addUsers(u)) {
+		if (us.addUsers(u) != null) {
 			res.setStatus(201);
 			res.getWriter().println("A user was created");
 		} else {

@@ -17,9 +17,14 @@
 			<!-- These will print the sql queries hibernate makes to the console and format them-->
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+
+		<mapping class="com.revature.models.Users"/>
+		<mapping class="com.revature.models.UserRoles"/>
+		<mapping class="com.revature.models.Reimbursement"/>
+		<mapping class="com.revature.models.ReimbursementStatus"/>
+		<mapping class="com.revature.models.ReimbursementType"/>
 		</session-factory>
-
-
 </hibernate-configuration>
 		

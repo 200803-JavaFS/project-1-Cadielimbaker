@@ -32,7 +32,7 @@ public class MasterServlet extends HttpServlet {
 		// will override for success requests.
 		res.setStatus(404);
 
-		final String URI = req.getRequestURI().replace("/project 1/", "");
+		final String URI = req.getRequestURI().replace("/project1/", "");
 
 		// example URI = avenger/1 to get avenger with ID 1
 
@@ -53,6 +53,7 @@ public class MasterServlet extends HttpServlet {
 						}
 					} else if (req.getMethod().equals("POST")) {
 						uc.addUsers(req, res);
+						//if/else for adding a reimbursement
 					}
 				} else {
 					res.setStatus(403);

@@ -10,14 +10,16 @@ import com.revature.utilities.HibernateUtil;
 
 public class UserRolesDAO implements IUserRolesDAO {
 	
-public UserRoles selectByUserRole(int userRoleId) {
+	@Override
+	public UserRoles selectByUserRole(int userRoleId) {
 		
 		Session ses = HibernateUtil.getSession();
 		
-		List<UserRoles> urList = ses.createQuery("FROM Ers_User_Roles WHERE="+userRoleId, UserRoles.class).list();
+		List<UserRoles> urList = ses.createQuery("FROM UserRoles WHERE=" +userRoleId).list();
 		
 		UserRoles ur = urList.get(0);	//just lists the first one if there are more than one
 		
 		return ur;
 	}
+	
 }

@@ -6,17 +6,17 @@ public class ReimbursementStatus implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int reimbStatusId;
-	private String reimbStatus;
+	private ReimbursementStatus reimbStatus;
 	
 //All arguments constructor	
-	public ReimbursementStatus(int reimbStatusId, String reimbStatus) {
+	public ReimbursementStatus(int reimbStatusId, ReimbursementStatus reimbStatus) {
 		super();
 		this.reimbStatusId = reimbStatusId;
 		this.reimbStatus = reimbStatus;
 	}
 
 //No reimbStatusId in constructor
-	public ReimbursementStatus(String reimbStatus) {
+	public ReimbursementStatus(ReimbursementStatus reimbStatus) {
 		super();
 		this.reimbStatus = reimbStatus;
 	}
@@ -37,12 +37,12 @@ public class ReimbursementStatus implements Serializable {
 	}
 
 
-	public String getReimbStatus() {
+	public ReimbursementStatus getReimbStatus() {
 		return reimbStatus;
 	}
 
 
-	public void setReimbStatus(String reimbStatus) {
+	public void setReimbStatus(ReimbursementStatus reimbStatus) {
 		this.reimbStatus = reimbStatus;
 	}
 

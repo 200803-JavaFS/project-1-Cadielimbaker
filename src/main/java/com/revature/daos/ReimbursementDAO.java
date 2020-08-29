@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.revature.models.Reimbursement;
@@ -21,13 +22,7 @@ public class ReimbursementDAO implements IReimbursementDAO{
 	
 	private IUsersDAO udao = new UsersDAO();
 	
-	public void updateUsers(Users u) {
-		
-		Session ses = HibernateUtil.getSession();
-		
-		ses.merge(u);
-	}
-	
+	@Override
 	public void updateReimbursementStatus(String reimbStatus, int reimbStatusId) {
 		
 		Session ses = HibernateUtil.getSession();
@@ -42,6 +37,37 @@ public class ReimbursementDAO implements IReimbursementDAO{
 		Session ses = HibernateUtil.getSession();
 		
 		ses.merge(reimbType);
+	}
+	
+	@Override
+	public Reimbursement selectByReimbId(int reimbId) {
+		
+		Session ses = HibernateUtil.getSession();
+		
+		Reimbursement r = ses.get(Reimbursement.class, reimbId);
+		
+		return r;
+	}
+	
+	@Override
+	public List<Reimbursement> findAllReimbursement() {
+		
+		Session ses = HibernateUtil.getSession();
+		List<Reimbursement> rList = ses.createQuery("FROM Reimbursement").list();
+		return rList;
+	}
+	
+	@Override
+	public boolean addReimbursement(Reimbursement r) {
+		Session ses = HibernateUtil.getSession();
+		
+		try {
+			ses.save(r);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

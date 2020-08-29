@@ -21,8 +21,8 @@ CREATE TABLE Ers_Reimbursement(
 	Reimb_Receipt BYTEA,
 	Reimb_Author_FK INTEGER NOT NULL REFERENCES Ers_Users_ID,
 	Reimb_Resolver_FK INTEGER REFERENCES Ers_Users_ID,
-	Reimb_Status_ID INTEGER NOT NULL REFERENCES Ers_Reimbursement_Status,
-	Reimb_Type_ID INTEGER NOT NULL REFERENCES Ers_Reimbursement_Type
+	Reimb_Status_ID_FK INTEGER NOT NULL REFERENCES Reimb_Status_ID,
+	Reimb_Type_ID_FK INTEGER NOT NULL REFERENCES Reimb_Type_ID
 );
 
 CREATE TABLE Ers_Reimbursement_Status(

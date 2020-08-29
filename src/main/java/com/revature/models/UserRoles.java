@@ -17,12 +17,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Ers_User_Roles")
 public class UserRoles implements Serializable {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@OneToMany(mappedBy="User_Role_ID",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+
 	
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userRoleId;
 	
 	

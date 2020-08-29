@@ -6,17 +6,17 @@ public class ReimbursementType implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int reimbTypeId;
-	private String reimbType;
+	private ReimbursementType reimbType;
 	
 //All arguments	
-	public ReimbursementType(int reimbTypeId, String reimbType) {
+	public ReimbursementType(int reimbTypeId, ReimbursementType reimbType) {
 		super();
 		this.reimbTypeId = reimbTypeId;
 		this.reimbType = reimbType;
 	}
 
 //No reimbTypeId
-	public ReimbursementType(String reimbType) {
+	public ReimbursementType(ReimbursementType reimbType) {
 		super();
 		this.reimbType = reimbType;
 	}
@@ -37,12 +37,12 @@ public class ReimbursementType implements Serializable {
 	}
 
 
-	public String getReimbType() {
+	public ReimbursementType getReimbType() {
 		return reimbType;
 	}
 
 
-	public void setReimbType(String reimbType) {
+	public void setReimbType(ReimbursementType reimbType) {
 		this.reimbType = reimbType;
 	}
 

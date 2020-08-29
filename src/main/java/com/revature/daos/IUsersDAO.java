@@ -15,9 +15,13 @@ public interface IUsersDAO {
 	
 	public Users insert(Users u);
 	
-	public void updateUsers(Users u); 
+	public boolean updateUsers(Users u); 
 	
 	public Users selectByUserName(String userName);
+
+	public Users selectByUserRoleId(int userRoleId);
+
+	public boolean addUsers(Users u);
 	
 }
 

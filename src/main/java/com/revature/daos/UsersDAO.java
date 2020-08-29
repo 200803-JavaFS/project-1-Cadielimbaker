@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,6 +22,7 @@ import com.revature.utilities.HibernateUtil;
 
 public class UsersDAO implements IUsersDAO{
 
+	@Override
 	public Users insert(Users u) {
 		
 		Session ses = HibernateUtil.getSession();
@@ -34,14 +36,36 @@ public class UsersDAO implements IUsersDAO{
 		
 		return u;
 	}
+	
+	@Override
+	public boolean addUsers(Users u) {
+		Session ses = HibernateUtil.getSession();
 
-	public void updateUsers(Users u) {
+		try {
+			ses.save(u);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean updateUsers(Users u) {
 	
 		Session ses = HibernateUtil.getSession();
 		
+		try {
 		ses.merge(u);
+		return true;
+		
+	}catch(HibernateException e) {
+		e.printStackTrace();
+		return false;
+	}
 	}
 	
+	@Override
 	public Users selectByUsersId(int usersId) {
 		
 		Session ses = HibernateUtil.getSession();
@@ -51,7 +75,8 @@ public class UsersDAO implements IUsersDAO{
 		return u;
 	}
 	
-public Users selectByUserRoleId(int userRoleId) {
+	@Override
+	public Users selectByUserRoleId(int userRoleId) {
 		
 		Session ses = HibernateUtil.getSession();
 		
@@ -60,41 +85,27 @@ public Users selectByUserRoleId(int userRoleId) {
 		return u;
 	}
 	
+	@Override
 	public Users selectByUserName(String userName) {
 		
 		Session ses = HibernateUtil.getSession();
 		
-		List<Users> uList = ses.createQuery("FROM Ers_Users WHERE="+userName, Users.class).list();
+		List<Users> uList = ses.createQuery("FROM Users WHERE userName=" +userName).list();
 		
 		Users u = uList.get(0);	//just lists the first one if there are more than one
 		
 		return u;
 	}
 	
-
-	
-	//public List<Users> selectAll(){
-		
-		//Session ses = HibernateUtil.getSession();
-		
-		//List<Users> uList = ses.createCriteria(Users.class).list();
-		//CriteriaBuilder cbuild = ses.getCriteriaBuilder();
-		//CriteriaQuery<Users> query = cbuild.createQuery(Users.class);
-		
-		
-		//return uList;
-	//}
-	
+	@Override
 	public List<Users> findAllUsers() {
 		
 		Session ses = HibernateUtil.getSession();
-		List<Users> uList = ses.createQuery("FROM Ers_Users").list();
+		List<Users> uList = ses.createQuery("FROM Users").list();
 		return uList;
 	}
 	
 	
-
-
 	@Override
 	public Users login(LoginDTO l) {
 		
@@ -118,7 +129,7 @@ public Users selectByUserRoleId(int userRoleId) {
 				u.setUserFirstName(result.getString("User_First_Name"));
 				u.setUserLastName(result.getString("User_Last_Name"));
 				u.setUserEmail(result.getString("User_Email"));
-				u.setUserRoleId(result.getInt("User_Role_ID_FK"));
+				//u.setUserRoleId(result.getInt("User_Role_ID_FK"));
 				
 				//return(u); 
 				

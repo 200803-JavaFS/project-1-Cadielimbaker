@@ -20,17 +20,17 @@ import java.io.Serializable;
 @Table(name="Ers_Users")
 public class Users implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="Ers_Users_ID")
-	private static final long serialVersionUID = 1L;
 	private int usersId;
 	
 	@Column(name="Ers_Username")
-	private static String userName;
+	private String userName;
 	
 	@Column(name="User_Password")
-	private static String password;
+	private String password;
 	
 	@Column(name="User_First_Name")
 	private String userFirstName;
@@ -43,12 +43,12 @@ public class Users implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="User_Role_ID_FK")
-	private int userRoleId;
+	private UserRoles userRoleId;
 	
 	
 //This is an all arguments constructor
 	public Users(int usersId, String userName, String password, String userFirstName, String userLastName,
-			String userEmail, int userRoleId) {
+			String userEmail, UserRoles userRoleId) {
 		super();
 		this.usersId = usersId;
 		this.userName = userName;
@@ -63,7 +63,7 @@ public class Users implements Serializable {
 	
 //This constructor has no userId because of serialization
 	public Users(String userName, String password, String userFirstName, String userLastName, String userEmail,
-			int userRoleId) {
+			UserRoles userRoleId) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -103,7 +103,7 @@ public class Users implements Serializable {
 	}
 	
 	
-	public static String getUserName() {
+	public String getUserName() {
 		return userName;
 	}
 	
@@ -113,7 +113,7 @@ public class Users implements Serializable {
 	}
 	
 	
-	public static String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 	
@@ -153,12 +153,12 @@ public class Users implements Serializable {
 	}
 	
 	
-	public int getUserRoleId() {
+	public UserRoles getUserRoleId() {
 		return userRoleId;
 	}
 	
 	
-	public void setUserRoleId(int userRoleId) {
+	public void setUserRoleId(UserRoles userRoleId) {
 		this.userRoleId = userRoleId;
 	}
 
@@ -182,7 +182,7 @@ public class Users implements Serializable {
 		result = prime * result + ((userFirstName == null) ? 0 : userFirstName.hashCode());
 		result = prime * result + ((userLastName == null) ? 0 : userLastName.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-		result = prime * result + userRoleId;
+		result = prime * result + ((userRoleId == null) ? 0 : userRoleId.hashCode());
 		result = prime * result + usersId;
 		return result;
 	}
@@ -223,7 +223,10 @@ public class Users implements Serializable {
 				return false;
 		} else if (!userName.equals(other.userName))
 			return false;
-		if (userRoleId != other.userRoleId)
+		if (userRoleId == null) {
+			if (other.userRoleId != null)
+				return false;
+		} else if (!userRoleId.equals(other.userRoleId))
 			return false;
 		if (usersId != other.usersId)
 			return false;
