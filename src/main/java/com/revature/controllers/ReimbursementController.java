@@ -1,11 +1,16 @@
 package com.revature.controllers;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementStatus;
+import com.revature.models.ReimbursementType;
 import com.revature.services.ReimbursementService;
 
 public class ReimbursementController {
@@ -26,13 +31,13 @@ public class ReimbursementController {
 		
 	}
 	
-	public void getAllAvengers(HttpServletResponse res) throws IOException {
-		List<Avenger> all = as.findAll();
+	public void getAllReimbursement(HttpServletResponse res) throws IOException {
+		List<Reimbursement> all = rs.findAllReimbursement();
 		res.getWriter().println(om.writeValueAsString(all));
 		res.setStatus(200);
 	}
 
-	public void addAvenger(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public void addReimbursement(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		BufferedReader reader = req.getReader();
 		
 		StringBuilder s = new StringBuilder();
@@ -48,14 +53,70 @@ public class ReimbursementController {
 		
 		System.out.println(body);
 		
-		Avenger a = om.readValue(body, Avenger.class);
+		Reimbursement r = om.readValue(body, Reimbursement.class);
 		
-		System.out.println(a);
+		System.out.println(r);
 		
-		if (as.addAvenger(a)) {
+		if (rs.addReimbursement(r)) {
 			res.setStatus(201);
-			res.getWriter().println("Avenger was created");
+			res.getWriter().println("A Reimbursement was added!");
 		} else {
 			res.setStatus(403);
 		}
 }
+	public void updateReimbursementStatus(HttpServletRequest req, HttpServletResponse res, int reimbStatusId) throws IOException {
+		ReimbursementStatus rstatus = rs.selectByReimbStatusId(reimbStatusId);
+		res.setStatus(200);
+		String json = om.writeValueAsString(rstatus);
+		res.getWriter().println(json);
+		
+		BufferedReader reader = req.getReader();
+		StringBuilder s = new StringBuilder();
+		String line = reader.readLine();
+
+		if(line !=null) {
+		s.append(line);
+		line = reader.readLine();
+	
+		String body = new String(s);
+		System.out.println(body);
+		String reimbStatus = om.updateValue(body, ReimbursementStatus.class);
+		System.out.println(reimbStatus);
+		
+		rs.updateReimbursementStatus(reimbStatus, reimbStatusId); 
+		res.setStatus(201);
+		res.getWriter().println("The Reimbursement Status was updated!");
+		
+		}else {
+			res.setStatus(403);
+		}
+	}
+
+	public void updateReimbursementType(HttpServletRequest req, HttpServletResponse res, int reimbTypeId) throws IOException {
+		ReimbursementType rtype = rs.selectByReimbTypeId(reimbTypeId);
+		res.setStatus(200);
+		String json = om.writeValueAsString(rtype);
+		res.getWriter().println(json);
+		
+		BufferedReader reader = req.getReader();
+		StringBuilder s = new StringBuilder();
+		String line = reader.readLine();
+		
+		if(line != null) {
+		s.append(line);
+		line = reader.readLine();
+		
+		String body = new String(s);
+		System.out.println(body);
+		String reimbType = om.updateValue(body, ReimbursementType.class);
+		System.out.println(reimbType);
+		
+		rs.updateReimbursementType(reimbType, reimbTypeId);
+		res.getWriter().println("The Reimbursement Type was updated!");
+		
+	}else {
+		res.setStatus(403);
+	}
+}
+}
+

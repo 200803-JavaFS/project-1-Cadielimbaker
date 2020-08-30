@@ -12,6 +12,8 @@ import com.revature.daos.ReimbursementDAO;
 import com.revature.daos.UserRolesDAO;
 import com.revature.daos.UsersDAO;
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementStatus;
+import com.revature.models.ReimbursementType;
 import com.revature.models.UserRoles;
 import com.revature.models.Users;
 
@@ -21,7 +23,7 @@ public class ReimbursementService {
 	private static IUserRolesDAO urdao = new UserRolesDAO();
 	private static final Logger log = LogManager.getLogger(UsersService.class); //WOULD LIKE TO FIGURE OUT HOW TO IMPLEMENT LOGGING
 	
-	//might need to add List<Users> list = udao.findAllUsers(); then return list;
+	
 	public List<Reimbursement> findAllReimbursement() {
 		return rdao.findAllReimbursement();
 		
@@ -43,4 +45,17 @@ public class ReimbursementService {
 	public void updateReimbursementType(String reimbType, int reimbTypeId) {
 		rdao.updateReimbursementType(reimbType, reimbTypeId);
 	}
+
+	public Reimbursement selectByReimbId(int reimbId) {
+		return rdao.selectByReimbId(reimbId);
+	}
+
+	public ReimbursementStatus selectByReimbStatusId(int reimbStatusId) {
+		return rdao.selectByReimbStatusId(reimbStatusId);
+	}
+
+	public ReimbursementType selectByReimbTypeId(int reimbTypeId) {
+		return rdao.selectByReimbTypeId(reimbTypeId);
+	}
+
 }

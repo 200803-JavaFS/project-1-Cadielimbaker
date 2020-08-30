@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.controllers.LoginController;
+import com.revature.controllers.ReimbursementController;
 import com.revature.controllers.UsersController;
 import com.revature.controllers.UsersController;
 import com.revature.models.Users;
@@ -18,6 +19,7 @@ public class MasterServlet extends HttpServlet {
 
 	private static UsersController uc = new UsersController();
 	private static LoginController lc = new LoginController();
+	private static ReimbursementController rc = new ReimbursementController();
 
 	public MasterServlet() {
 		super();
@@ -53,16 +55,66 @@ public class MasterServlet extends HttpServlet {
 						}
 					} else if (req.getMethod().equals("POST")) {
 						uc.addUsers(req, res);
-						//if/else for adding a reimbursement
 					}
 				} else {
 					res.setStatus(403);
 					res.getWriter().println("You must be logged in to do that!");
 				}
 				break;
+				
+			case "Reimbursement":
+				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
+					if (req.getMethod().equals("GET")) {
+						if (portions.length == 2) {
+							int reimbId = Integer.parseInt(portions[1]);
+							rc.getReimbursement(res, reimbId);
+						} else if (portions.length == 1) {
+							rc.getAllReimbursement(res);
+						}
+					} else if (req.getMethod().equals("POST")) {
+						rc.addReimbursement(req, res);
+					}
+				
+				} else {
+					res.setStatus(403);
+					res.getWriter().println("You must be logged in to do that!");
+				}
+				break;
+				
+			case "ReimbursementStatus":
+				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
+					if (req.getMethod().equals("PATCH")) {
+						if (portions.length == 2) {
+							int reimbStatusId = Integer.parseInt(portions[1]);
+							rc.updateReimbursementStatus(req, res, reimbStatusId);
+						} 
+					} 
+				
+				} else {
+					res.setStatus(403);
+					res.getWriter().println("You must be logged in to do that!");
+				}
+				break;
+				
+			case "ReimbursementType":
+				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
+					if (req.getMethod().equals("PATCH")) {
+						if (portions.length == 2) {
+							int reimbTypeId = Integer.parseInt(portions[1]);
+							rc.updateReimbursementType(req, res, reimbTypeId);
+						} 
+					} 
+				
+				} else {
+					res.setStatus(403);
+					res.getWriter().println("You must be logged in to do that!");
+				}
+				break;
+				
 			case "Login":
 				lc.login(req, res);
 				break;
+				
 			case "Logout":
 				lc.logout(req, res);
 				break;

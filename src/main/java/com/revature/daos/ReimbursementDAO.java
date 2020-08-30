@@ -12,6 +12,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementStatus;
+import com.revature.models.ReimbursementType;
 import com.revature.models.Users;
 import com.revature.utilities.ConnectionUtil;
 import com.revature.utilities.HibernateUtil;
@@ -68,6 +70,26 @@ public class ReimbursementDAO implements IReimbursementDAO{
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+
+	@Override
+	public ReimbursementStatus selectByReimbStatusId(int reimbStatusId) {
+		Session ses = HibernateUtil.getSession();
+		
+		ReimbursementStatus rstatus = ses.get(ReimbursementStatus.class, reimbStatusId);
+		
+		return rstatus;
+	}
+
+
+	@Override
+	public ReimbursementType selectByReimbTypeId(int reimbTypeId) {
+		Session ses = HibernateUtil.getSession();
+		
+		ReimbursementType rtype = ses.get(ReimbursementType.class, reimbTypeId);
+		
+		return rtype;
 	}
 
 }
