@@ -58,4 +58,14 @@ public class ReimbursementService {
 		return rdao.selectByReimbTypeId(reimbTypeId);
 	}
 
+	public boolean addReimbursementStatus(ReimbursementStatus reimbStatus) {
+		rdao.addReimbursementStatus(reimbStatus);
+		return false;
+	}
+
+	public boolean addReimbursementType(ReimbursementType reimbType) {
+		rdao.addReimbursementType(reimbType);
+		return false;
+	}
+
 }

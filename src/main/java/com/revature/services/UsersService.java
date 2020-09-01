@@ -34,5 +34,10 @@ public class UsersService {
 	public UserRoles findByUserRoleId(int userRoleId) {
 		return urdao.selectByUserRole(userRoleId);
 	}
+
+	public Object addUserRoles(UserRoles userRole) {
+		urdao.addUserRoles(userRole);
+		return null;
+	}
 		
 }

@@ -118,5 +118,61 @@ public class ReimbursementController {
 		res.setStatus(403);
 	}
 }
+	public void addReimbursementStatus(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		BufferedReader reader = req.getReader();
+		
+		StringBuilder s = new StringBuilder();
+		
+		String line = reader.readLine();
+		
+		while(line != null) {
+			s.append(line);
+			line = reader.readLine();
+		}
+		
+		String body = new String(s);
+		
+		System.out.println(body);
+		
+		ReimbursementStatus reimbStatus = om.readValue(body, ReimbursementStatus.class);
+		
+		System.out.println(reimbStatus);
+		
+		if (rs.addReimbursementStatus(reimbStatus)) {
+			res.setStatus(201);
+			res.getWriter().println("A Reimbursement Status was added!");
+		} else {
+			res.setStatus(403);
+		}
 }
+
+	public void addReimbursementType(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		BufferedReader reader = req.getReader();
+		
+		StringBuilder s = new StringBuilder();
+		
+		String line = reader.readLine();
+		
+		while(line != null) {
+			s.append(line);
+			line = reader.readLine();
+		}
+		
+		String body = new String(s);
+		
+		System.out.println(body);
+		
+		ReimbursementType reimbType = om.readValue(body, ReimbursementType.class);
+		
+		System.out.println(reimbType);
+		
+		if (rs.addReimbursementType(reimbType)) {
+			res.setStatus(201);
+			res.getWriter().println("A Reimbursement Type was added!");
+		} else {
+			res.setStatus(403);
+		}
+}
+	}
+
 

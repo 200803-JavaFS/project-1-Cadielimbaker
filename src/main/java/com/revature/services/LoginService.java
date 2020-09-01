@@ -8,7 +8,11 @@ public class LoginService {
 	UsersDAO udao = new UsersDAO();
 	public boolean login(LoginDTO l) {
 		Users u = udao.selectByUserName(l.userName);
-		if((u!=null) && l.password.equals(u.getPassword())) {
+		StringBuilder tempPassword = new StringBuilder();
+		tempPassword.append(l.password.hashCode());
+		String hashPassword = tempPassword.toString();
+		
+		if((u!=null) && hashPassword.equals(u.getPassword())) {
 			return true;
 		
 		}else {

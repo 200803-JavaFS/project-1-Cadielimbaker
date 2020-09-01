@@ -62,6 +62,22 @@ public class MasterServlet extends HttpServlet {
 				}
 				break;
 				
+			case "UserRoles":
+				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
+					if (req.getMethod().equals("GET")) {
+						if (portions.length == 2) {
+							int userRolesId = Integer.parseInt(portions[1]);
+							uc.getUserRole(res, userRolesId);
+						} 
+					} else if (req.getMethod().equals("POST")) {
+						uc.addUserRoles(req, res);
+					}
+				} else {
+					res.setStatus(403);
+					res.getWriter().println("You must be logged in to do that!");
+				}
+				break;
+				
 			case "Reimbursement":
 				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
 					if (req.getMethod().equals("GET")) {
@@ -74,36 +90,6 @@ public class MasterServlet extends HttpServlet {
 					} else if (req.getMethod().equals("POST")) {
 						rc.addReimbursement(req, res);
 					}
-				
-				} else {
-					res.setStatus(403);
-					res.getWriter().println("You must be logged in to do that!");
-				}
-				break;
-				
-			case "ReimbursementStatus":
-				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
-					if (req.getMethod().equals("PATCH")) {
-						if (portions.length == 2) {
-							int reimbStatusId = Integer.parseInt(portions[1]);
-							rc.updateReimbursementStatus(req, res, reimbStatusId);
-						} 
-					} 
-				
-				} else {
-					res.setStatus(403);
-					res.getWriter().println("You must be logged in to do that!");
-				}
-				break;
-				
-			case "ReimbursementType":
-				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
-					if (req.getMethod().equals("PATCH")) {
-						if (portions.length == 2) {
-							int reimbTypeId = Integer.parseInt(portions[1]);
-							rc.updateReimbursementType(req, res, reimbTypeId);
-						} 
-					} 
 				
 				} else {
 					res.setStatus(403);

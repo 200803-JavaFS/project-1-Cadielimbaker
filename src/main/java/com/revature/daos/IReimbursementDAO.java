@@ -22,4 +22,12 @@ public interface IReimbursementDAO {
 
 	public List<Reimbursement> findAllReimbursement();
 
+	public boolean addReimbursementType(ReimbursementType reimbType);
+
+	public boolean addReimbursementWithType(Reimbursement r);
+
+	public boolean addReimbursementStatus(ReimbursementStatus reimbStatus);
+
+	public boolean addReimbursementWithStatus(Reimbursement r);
+
 }

@@ -68,7 +68,36 @@ public class UsersController {
 		
 		if (us.addUsers(u) != null) {
 			res.setStatus(201);
-			res.getWriter().println("A user was created");
+			res.getWriter().println("A user was created!");
+		} else {
+			res.setStatus(403);
+		}
+		
+	}
+
+	public void addUserRoles(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		BufferedReader reader = req.getReader();
+		
+		StringBuilder s = new StringBuilder();
+		
+		String line = reader.readLine();
+		
+		while(line != null) {
+			s.append(line);
+			line = reader.readLine();
+		}
+		
+		String body = new String(s);
+		
+		System.out.println(body);
+		
+		UserRoles userRole = om.readValue(body, UserRoles.class);
+		
+		System.out.println(userRole);
+		
+		if (us.addUserRoles(userRole) != null) {
+			res.setStatus(201);
+			res.getWriter().println("A user role was created!");
 		} else {
 			res.setStatus(403);
 		}

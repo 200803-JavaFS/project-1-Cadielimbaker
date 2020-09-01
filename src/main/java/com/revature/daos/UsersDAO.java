@@ -90,9 +90,9 @@ public class UsersDAO implements IUsersDAO{
 		
 		Session ses = HibernateUtil.getSession();
 		
-		List<Users> uList = ses.createQuery("FROM Users WHERE userName=" +userName).list();
+		List<Users> uList = ses.createQuery("FROM Users WHERE userName='" +userName+"'").list();
 		
-		Users u = uList.get(0);	//just lists the first one if there are more than one
+		Users u = uList.get(1);	//just lists the first one if there are more than one
 		
 		return u;
 	}
