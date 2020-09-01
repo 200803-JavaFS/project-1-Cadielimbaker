@@ -2,10 +2,24 @@ package com.revature.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Ers_Reimbursement_Type")
 public class ReimbursementType implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="Reimb_Type_ID")
 	private int reimbTypeId;
+	
+	@Column(name="Reimb_Type")
 	private ReimbursementType reimbType;
 	
 //All arguments	

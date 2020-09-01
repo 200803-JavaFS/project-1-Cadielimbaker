@@ -3,6 +3,7 @@ package com.revature.daos;
 import java.util.List;
 
 import com.revature.models.LoginDTO;
+import com.revature.models.UserRoles;
 import com.revature.models.Users;
 
 public interface IUsersDAO {

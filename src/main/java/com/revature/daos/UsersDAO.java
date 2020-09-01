@@ -17,6 +17,7 @@ import org.hibernate.Transaction;
 import com.revature.models.Users;
 import com.revature.models.LoginDTO;
 import com.revature.models.Reimbursement;
+import com.revature.models.UserRoles;
 import com.revature.utilities.ConnectionUtil;
 import com.revature.utilities.HibernateUtil;
 
@@ -24,7 +25,7 @@ public class UsersDAO implements IUsersDAO{
 
 	@Override
 	public Users insert(Users u) {
-		
+		System.out.println("inserting");
 		Session ses = HibernateUtil.getSession();
 		
 		Transaction tr = ses.beginTransaction();
@@ -34,13 +35,14 @@ public class UsersDAO implements IUsersDAO{
 		tr.commit();	//inserts into the database table
 		//only doing one function so you don't really need this as a transaction
 		
+		HibernateUtil.closeSes();
 		return u;
 	}
 	
 	@Override
 	public boolean addUsers(Users u) {
 		Session ses = HibernateUtil.getSession();
-
+		System.out.println("here");
 		try {
 			ses.save(u);
 			return true;
