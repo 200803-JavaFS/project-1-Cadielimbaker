@@ -19,18 +19,33 @@ public class UserRolesDAO implements IUserRolesDAO {
 	@Override
 	public UserRoles selectByUserRole(int userRoleId) {
 		
-		Session ses = HibernateUtil.getSession();
-
-		UserRoles ur = ses.get(UserRoles.class, userRoleId);
-		return ur;
+//		Session ses = HibernateUtil.getSession();
+//
+//		UserRoles ur = ses.get(UserRoles.class, userRoleId);
+//		System.out.println(ur);
+//		return ur;
 		
 //		Session ses = HibernateUtil.getSession();
 //		
 //		List<UserRoles> urList = ses.createQuery("FROM UserRoles WHERE userRoleId=" +userRoleId).list();
 //		
-//		UserRoles ur = urList.get(1);	//just lists the first one if there are more than one
+//		UserRoles ur = urList.get(0);	//just lists the first one if there are more than one
 //		
+//		System.out.println(ur);
 //		return ur;
+		
+		Session ses = HibernateUtil.getSession();
+		
+		try {
+			UserRoles ur = ses.get(UserRoles.class, userRoleId);
+			return ur;
+		}
+		catch(HibernateException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	
 	}
 	
 	@Override

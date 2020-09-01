@@ -17,20 +17,21 @@ public class Driver {
 	
 	public static void main(String[]args) {
 		//addUser1();
-		insertUser2();
+		insertUser3();
 		
 	}
 	
-	private static void insertUser2() {
-		String p2 = "password2";
+	private static void insertUser3() {
+		String p3 = "password3";
 		StringBuilder sb = new StringBuilder();
-		sb.append(p2.hashCode());
-		String hashp2 = sb.toString();
+		sb.append(p3.hashCode());
+		String hashp3 = sb.toString();
 		
-		UserRoles ur2 = urdao.selectByUserRole(1);
-		System.out.println(ur2);
-		Users u = new Users ("carolinelimbaker", hashp2, "caroline", "limbaker",
-				"carolinelimbaker@email.com", ur2);
+		UserRoles ur3 = urdao.selectByUserRole(1);
+		System.out.println(ur3);
+		Users u = new Users ("cadielimbaker",hashp3, "cadie", "limbaker", "cadielimbaker@email.com", ur3);
+		//Users u = new Users ("melissalimbaker", hashp3, "melissa", "limbaker",
+				//"melissalimbaker@email.com", ur3);
 		udao.insert(u);
 		System.out.println(u);
 		

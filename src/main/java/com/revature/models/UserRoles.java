@@ -22,7 +22,7 @@ public class UserRoles implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="Users_Role_ID")
+	@Column(name="User_Role_ID")
 	private int userRoleId;
 	
 	@Column(name="User_Role")
