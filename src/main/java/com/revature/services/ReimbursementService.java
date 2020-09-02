@@ -71,4 +71,12 @@ public class ReimbursementService {
 		return rdao.findReimbursementByAuthor(reimbAuthor);
 		
 	}
+
+	public List<ReimbursementStatus> findAllReimbursementStatus() {
+		return rdao.findAllReimbursementStatus();
+	}
+	
+	public List<ReimbursementType> findAllReimbursementType() {
+		return rdao.findAllReimbursementType();
+	}
 }

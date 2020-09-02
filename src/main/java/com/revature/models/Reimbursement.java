@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.sql.Timestamp;
 
 @Entity
@@ -31,9 +34,11 @@ public class Reimbursement implements Serializable {
 	@Column(name="Reimb_Amount", nullable=false)
 	private double reimbAmount;
 	
+	@CreationTimestamp
 	@Column(name="Reimb_Submitted", nullable=false)
 	private Timestamp reimbSubmitted;
 	
+	@UpdateTimestamp
 	@Column(name="Reimb_Resolved")
 	private Timestamp reimbResolved;
 	

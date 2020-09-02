@@ -36,6 +36,18 @@ public class ReimbursementController {
 		res.getWriter().println(om.writeValueAsString(all));
 		res.setStatus(200);
 	}
+	
+	public void findAllReimbursementStatus(HttpServletResponse res) throws IOException {
+		List<ReimbursementStatus> all = rs.findAllReimbursementStatus();
+		res.getWriter().println(om.writeValueAsString(all));
+		res.setStatus(200);
+	}
+	
+	public void findAllReimbursementType(HttpServletResponse res) throws IOException {
+		List<ReimbursementType> all = rs.findAllReimbursementType();
+		res.getWriter().println(om.writeValueAsString(all));
+		res.setStatus(200);
+	}
 
 	public void addReimbursement(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		BufferedReader reader = req.getReader();

@@ -32,5 +32,9 @@ public interface IReimbursementDAO {
 	public boolean addReimbursementWithStatus(Reimbursement r);
 
 	public List<Reimbursement> findReimbursementByAuthor(int reimbAuthor);
+	
+	public List<ReimbursementStatus> findAllReimbursementStatus();
+
+	public List<ReimbursementType> findAllReimbursementType();
 
 }

@@ -66,16 +66,30 @@ public class ReimbursementDAO implements IReimbursementDAO{
 	
 	@Override
 	public boolean addReimbursement(Reimbursement r) {
-		Session ses = HibernateUtil.getSession();
 		
-		try {
+			Session ses = HibernateUtil.getSession();
+			try {
+			Transaction tx= ses.beginTransaction();
 			ses.save(r);
+			tx.commit();
 			return true;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return false;
+			
+			}catch (HibernateException e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
-	}
+		
+//		Session ses = HibernateUtil.getSession();
+//		
+//		try {
+//			ses.save(r);
+//			return true;
+//		} catch (HibernateException e) {
+//			e.printStackTrace();
+//			return false;
+//		}
+	//}
 
 
 	@Override
@@ -187,5 +201,27 @@ public class ReimbursementDAO implements IReimbursementDAO{
 		return tickets;
 	}
 
-
+	@Override
+	public List<ReimbursementStatus> findAllReimbursementStatus() {
+		Session ses = HibernateUtil.getSession();
+		try {
+			List<ReimbursementStatus> rslist = ses.createQuery("From ReimbursementStatus").list();
+			return rslist;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	public List<ReimbursementType> findAllReimbursementType() {
+		Session ses = HibernateUtil.getSession();
+		try {
+			List<ReimbursementType> rtlist = ses.createQuery("From ReimbursementType").list();
+			return rtlist;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

@@ -25,7 +25,7 @@ public class UsersDAO implements IUsersDAO{
 
 	@Override
 	public Users insert(Users u) {
-		System.out.println("inserting");
+
 		Session ses = HibernateUtil.getSession();
 		
 		Transaction tr = ses.beginTransaction();
