@@ -26,19 +26,19 @@ public class Users implements Serializable {
 	@Column(name="Ers_Users_ID")
 	private int usersId;
 	
-	@Column(name="Ers_Username")
+	@Column(name="Ers_Username", nullable=false, unique=true)
 	private String userName;
 	
-	@Column(name="User_Password")
+	@Column(name="User_Password", nullable=false)
 	private String password;
 	
-	@Column(name="User_First_Name")
+	@Column(name="User_First_Name", nullable=false)
 	private String userFirstName;
 	
-	@Column(name="User_Last_Name")
+	@Column(name="User_Last_Name", nullable=false)
 	private String userLastName;
 	
-	@Column(name="User_Email")
+	@Column(name="User_Email", nullable=false, unique=true)
 	private String userEmail;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)

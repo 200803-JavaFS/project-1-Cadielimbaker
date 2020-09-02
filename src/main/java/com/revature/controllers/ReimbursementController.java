@@ -138,7 +138,7 @@ public class ReimbursementController {
 		
 		System.out.println(reimbStatus);
 		
-		if (rs.addReimbursementStatus(reimbStatus)) {
+		if (rs.addReimbursementStatus(reimbStatus) != null) {
 			res.setStatus(201);
 			res.getWriter().println("A Reimbursement Status was added!");
 		} else {
@@ -166,7 +166,7 @@ public class ReimbursementController {
 		
 		System.out.println(reimbType);
 		
-		if (rs.addReimbursementType(reimbType)) {
+		if (rs.addReimbursementType(reimbType) != null) {
 			res.setStatus(201);
 			res.getWriter().println("A Reimbursement Type was added!");
 		} else {

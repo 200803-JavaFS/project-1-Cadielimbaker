@@ -21,18 +21,18 @@ public class ReimbursementStatus implements Serializable {
 	@Column(name="Reimb_Status_ID")
 	private int reimbStatusId;
 	
-	@Column(name="Reimb_Status")
-	private ReimbursementStatus reimbStatus;
+	@Column(name="Reimb_Status", nullable=false)
+	private String reimbStatus;
 	
 //All arguments constructor	
-	public ReimbursementStatus(int reimbStatusId, ReimbursementStatus reimbStatus) {
+	public ReimbursementStatus(int reimbStatusId, String reimbStatus) {
 		super();
 		this.reimbStatusId = reimbStatusId;
 		this.reimbStatus = reimbStatus;
 	}
 
 //No reimbStatusId in constructor
-	public ReimbursementStatus(ReimbursementStatus reimbStatus) {
+	public ReimbursementStatus(String reimbStatus) {
 		super();
 		this.reimbStatus = reimbStatus;
 	}
@@ -53,21 +53,19 @@ public class ReimbursementStatus implements Serializable {
 	}
 
 
-	public ReimbursementStatus getReimbStatus() {
+	public String getReimbStatus() {
 		return reimbStatus;
 	}
 
 
-	public void setReimbStatus(ReimbursementStatus reimbStatus) {
+	public void setReimbStatus(String reimbStatus) {
 		this.reimbStatus = reimbStatus;
 	}
-
 
 	@Override
 	public String toString() {
 		return "ReimbursementStatus [reimbStatusId=" + reimbStatusId + ", reimbStatus=" + reimbStatus + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -77,7 +75,6 @@ public class ReimbursementStatus implements Serializable {
 		result = prime * result + reimbStatusId;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -97,6 +94,8 @@ public class ReimbursementStatus implements Serializable {
 			return false;
 		return true;
 	}
+
+
 	
 	
 }

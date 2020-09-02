@@ -35,7 +35,7 @@ public class UsersService {
 		return urdao.selectByUserRole(userRoleId);
 	}
 
-	public Object addUserRoles(UserRoles userRole) {
+	public UserRoles addUserRoles(UserRoles userRole) {
 		urdao.addUserRoles(userRole);
 		return null;
 	}

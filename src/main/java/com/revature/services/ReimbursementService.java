@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -58,14 +59,16 @@ public class ReimbursementService {
 		return rdao.selectByReimbTypeId(reimbTypeId);
 	}
 
-	public boolean addReimbursementStatus(ReimbursementStatus reimbStatus) {
-		rdao.addReimbursementStatus(reimbStatus);
-		return false;
+	public ReimbursementStatus addReimbursementStatus(ReimbursementStatus reimbStatus) {
+		return rdao.addReimbursementStatus(reimbStatus);
 	}
 
-	public boolean addReimbursementType(ReimbursementType reimbType) {
-		rdao.addReimbursementType(reimbType);
-		return false;
+	public ReimbursementType addReimbursementType(ReimbursementType reimbType) {
+		return rdao.addReimbursementType(reimbType);
 	}
 
+	public List<Reimbursement> findReimbursementByAuthor(int reimbAuthor) {
+		return rdao.findReimbursementByAuthor(reimbAuthor);
+		
+	}
 }

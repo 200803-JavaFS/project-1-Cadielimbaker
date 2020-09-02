@@ -1,5 +1,6 @@
 package com.revature.daos;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,7 @@ import org.hibernate.Session;
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
+import com.revature.models.UserRoles;
 import com.revature.models.Users;
 import com.revature.utilities.ConnectionUtil;
 import com.revature.utilities.HibernateUtil;
@@ -25,7 +27,7 @@ import com.revature.daos.IUsersDAO;
 public class ReimbursementDAO implements IReimbursementDAO{
 	
 	private IUsersDAO udao = new UsersDAO();
-	private IReimbursementDAO rdao = new ReimbursementDAO();
+	//private IReimbursementDAO rdao = new ReimbursementDAO();
 	
 	@Override
 	public void updateReimbursementStatus(String reimbStatus, int reimbStatusId) {
@@ -78,11 +80,24 @@ public class ReimbursementDAO implements IReimbursementDAO{
 
 	@Override
 	public ReimbursementStatus selectByReimbStatusId(int reimbStatusId) {
+		//Session ses = HibernateUtil.getSession();
+		
+		//ReimbursementStatus rstatus = ses.get(ReimbursementStatus.class, reimbStatusId);
+		
+		//return rstatus;
+		
 		Session ses = HibernateUtil.getSession();
 		
-		ReimbursementStatus rstatus = ses.get(ReimbursementStatus.class, reimbStatusId);
+		try {
+			ReimbursementStatus rstatus = ses.get(ReimbursementStatus.class, reimbStatusId);
+			return rstatus;
+		}
+		catch(HibernateException e) {
+			e.printStackTrace();
+		}
 		
-		return rstatus;
+		return null;
+	
 	}
 
 
@@ -96,16 +111,17 @@ public class ReimbursementDAO implements IReimbursementDAO{
 	}
 	
 	@Override
-	public boolean addReimbursementType(ReimbursementType reimbType) {
+	public ReimbursementType addReimbursementType(ReimbursementType reimbType) {
 		Session ses = HibernateUtil.getSession();
 		
 		try {
 			ses.save(reimbType);
-			return true;
+			//return true;
 		}catch (HibernateException e) {
 			e.printStackTrace();
-			return false;
+			//return false;
 		}
+		return reimbType;
 		
 	}
 	
@@ -129,16 +145,17 @@ public class ReimbursementDAO implements IReimbursementDAO{
 	}
 	
 	@Override
-	public boolean addReimbursementStatus(ReimbursementStatus reimbStatus) {
+	public ReimbursementStatus addReimbursementStatus(ReimbursementStatus reimbStatus) {
 		Session ses = HibernateUtil.getSession();
 		
 		try {
-			ses.save(reimbStatus);
-			return true;
+			 ses.save(reimbStatus);
+			//return true;
 		}catch (HibernateException e) {
 			e.printStackTrace();
-			return false;
+			//return false;
 		}
+		return reimbStatus;
 		
 	}
 	
@@ -160,5 +177,15 @@ public class ReimbursementDAO implements IReimbursementDAO{
 			return false;
 		}
 	}
+
+
+	@Override
+	public List<Reimbursement> findReimbursementByAuthor(int reimbAuthor) {
+			
+		Session ses = HibernateUtil.getSession();
+		List<Reimbursement> tickets = ses.createQuery("FROM Reimbursement WHERE reimbAuthor=" +reimbAuthor).list();
+		return tickets;
+	}
+
 
 }

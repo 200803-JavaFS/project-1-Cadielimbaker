@@ -35,14 +35,12 @@ public class UsersDAO implements IUsersDAO{
 		tr.commit();	//inserts into the database table
 		//only doing one function so you don't really need this as a transaction
 		
-		HibernateUtil.closeSes();
 		return u;
 	}
 	
 	@Override
 	public boolean addUsers(Users u) {
 		Session ses = HibernateUtil.getSession();
-		System.out.println("here");
 		try {
 			ses.save(u);
 			return true;

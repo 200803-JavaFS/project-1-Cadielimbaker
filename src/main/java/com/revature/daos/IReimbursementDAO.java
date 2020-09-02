@@ -1,5 +1,6 @@
 package com.revature.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.Reimbursement;
@@ -22,12 +23,14 @@ public interface IReimbursementDAO {
 
 	public List<Reimbursement> findAllReimbursement();
 
-	public boolean addReimbursementType(ReimbursementType reimbType);
+	public ReimbursementType addReimbursementType(ReimbursementType reimbType);
 
 	public boolean addReimbursementWithType(Reimbursement r);
 
-	public boolean addReimbursementStatus(ReimbursementStatus reimbStatus);
+	public ReimbursementStatus addReimbursementStatus(ReimbursementStatus reimbStatus);
 
 	public boolean addReimbursementWithStatus(Reimbursement r);
+
+	public List<Reimbursement> findReimbursementByAuthor(int reimbAuthor);
 
 }

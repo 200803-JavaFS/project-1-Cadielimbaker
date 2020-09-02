@@ -25,7 +25,7 @@ public class UserRoles implements Serializable {
 	@Column(name="User_Role_ID")
 	private int userRoleId;
 	
-	@Column(name="User_Role")
+	@Column(name="User_Role", nullable=false)
 	private String userRole;
 	
 //This is an all arguments constructor	

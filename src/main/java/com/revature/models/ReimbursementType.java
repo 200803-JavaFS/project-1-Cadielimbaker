@@ -19,18 +19,18 @@ public class ReimbursementType implements Serializable {
 	@Column(name="Reimb_Type_ID")
 	private int reimbTypeId;
 	
-	@Column(name="Reimb_Type")
-	private ReimbursementType reimbType;
+	@Column(name="Reimb_Type", nullable=false)
+	private String reimbType;
 	
 //All arguments	
-	public ReimbursementType(int reimbTypeId, ReimbursementType reimbType) {
+	public ReimbursementType(int reimbTypeId, String reimbType) {
 		super();
 		this.reimbTypeId = reimbTypeId;
 		this.reimbType = reimbType;
 	}
 
 //No reimbTypeId
-	public ReimbursementType(ReimbursementType reimbType) {
+	public ReimbursementType(String reimbType) {
 		super();
 		this.reimbType = reimbType;
 	}
@@ -51,21 +51,19 @@ public class ReimbursementType implements Serializable {
 	}
 
 
-	public ReimbursementType getReimbType() {
+	public String getReimbType() {
 		return reimbType;
 	}
 
 
-	public void setReimbType(ReimbursementType reimbType) {
+	public void setReimbType(String reimbType) {
 		this.reimbType = reimbType;
 	}
-
 
 	@Override
 	public String toString() {
 		return "ReimbursementType [reimbTypeId=" + reimbTypeId + ", reimbType=" + reimbType + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -75,7 +73,6 @@ public class ReimbursementType implements Serializable {
 		result = prime * result + reimbTypeId;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -95,5 +92,5 @@ public class ReimbursementType implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }
