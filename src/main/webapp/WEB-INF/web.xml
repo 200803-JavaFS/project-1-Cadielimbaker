@@ -11,16 +11,13 @@
   </welcome-file-list>
   
  <filter>
-		<filter-name>CorsFilter</filter-name>
-		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-		<init-param>
-			<param-name>cors.allowed.origins</param-name>
-			<param-value>*</param-value>
-		</init-param>
+		<filter-name>Cors</filter-name>
+		<filter-class>com.revature.web.filters.CorsFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>CorsFilter</filter-name>
+		<filter-name>Cors</filter-name>
 		<url-pattern>/*</url-pattern>
+		<!-- All requests should go through our CORS filter -->
 	</filter-mapping>
   
   <servlet>
@@ -33,14 +30,5 @@
   	<url-pattern>/*</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-  	<display-name>LoginController</display-name>
-  	<servlet-name>LoginController</servlet-name>
-  	<servlet-class>com.revature.controllers.LoginController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>LoginController</servlet-name>
-  	<url-pattern>/login</url-pattern>
-  </servlet-mapping>
   
 </web-app>

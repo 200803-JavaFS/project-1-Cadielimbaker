@@ -97,11 +97,11 @@ public class MasterServlet extends HttpServlet {
 				}
 				break;
 				
-			case "Login":
+			case "login":
 				lc.login(req, res);
 				break;
 				
-			case "Logout":
+			case "logout":
 				lc.logout(req, res);
 				break;
 			}
