@@ -1,5 +1,6 @@
 package com.revature.daos;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,6 @@ import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 
 public interface IReimbursementDAO {
-
-	public void updateReimbursementStatus(String reimbStatus, int reimbStatusId);
-
-	public void updateReimbursementType(String reimbType, int reimbTypeId);
 
 	public Reimbursement selectByReimbId(int reimbId);
 	
@@ -36,5 +33,9 @@ public interface IReimbursementDAO {
 	public List<ReimbursementStatus> findAllReimbursementStatus();
 
 	public List<ReimbursementType> findAllReimbursementType();
+
+	public Reimbursement selectByReimbResolved(Timestamp reimbResolved);
+
+	public boolean updateReimbursement(Reimbursement r);
 
 }

@@ -103,5 +103,17 @@ public class UsersController {
 		}
 		
 	}
+	
+	public void selectUByUsername(HttpServletResponse res, String userName) throws IOException {
+		
+		Users u = us.selectByUsername(userName);
+		if (u == null) {
+			res.setStatus(204);
+		}else {
+			res.setStatus(204);
+			String json = om.writeValueAsString(u);
+			res.getWriter().println(json);			
+		}
+	}
 
 }

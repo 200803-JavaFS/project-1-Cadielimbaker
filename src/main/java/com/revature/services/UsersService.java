@@ -40,4 +40,8 @@ public class UsersService {
 		return null;
 	}
 		
+	public Users selectByUsername(String userName) {
+		return udao.selectByUserName(userName);
+	}
+
 }

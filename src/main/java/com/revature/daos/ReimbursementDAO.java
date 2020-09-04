@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,20 +31,19 @@ public class ReimbursementDAO implements IReimbursementDAO{
 	//private IReimbursementDAO rdao = new ReimbursementDAO();
 	
 	@Override
-	public void updateReimbursementStatus(String reimbStatus, int reimbStatusId) {
+	public boolean updateReimbursement(Reimbursement r) {
 		
 		Session ses = HibernateUtil.getSession();
+		Transaction tx= ses.beginTransaction();
+		try {
+		ses.merge(r);
+		tx.commit();
+		return true;
 		
-		ses.merge(reimbStatus);
-	}
-	
-
-	@Override
-	public void updateReimbursementType(String reimbType, int reimbTypeId) {
-		
-		Session ses = HibernateUtil.getSession();
-		
-		ses.merge(reimbType);
+		}catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	@Override
@@ -223,5 +223,20 @@ public class ReimbursementDAO implements IReimbursementDAO{
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+
+	@Override
+	public Reimbursement selectByReimbResolved(Timestamp reimbResolved) {
+		Session ses = HibernateUtil.getSession();
+		try {
+			Reimbursement r = ses.get(Reimbursement.class, reimbResolved);
+			return r;
+		}
+		catch(HibernateException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

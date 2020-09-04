@@ -2,6 +2,7 @@ package com.revature.web;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Arrays;
 
 import javax.servlet.ServletException;
@@ -13,14 +14,16 @@ import com.revature.controllers.LoginController;
 import com.revature.controllers.ReimbursementController;
 import com.revature.controllers.UsersController;
 import com.revature.controllers.UsersController;
+import com.revature.models.LoginDTO;
 import com.revature.models.Users;
+import com.revature.services.UsersService;
 
 public class MasterServlet extends HttpServlet {
 
 	private static UsersController uc = new UsersController();
 	private static LoginController lc = new LoginController();
 	private static ReimbursementController rc = new ReimbursementController();
-
+	private static UsersService us = new UsersService();
 	public MasterServlet() {
 		super();
 	}
@@ -41,6 +44,9 @@ public class MasterServlet extends HttpServlet {
 		String[] portions = URI.split("/");
 
 		System.out.println(Arrays.toString(portions));
+		if(portions.length==0) {
+			req.getRequestDispatcher("index.html").forward(req, res);
+		}
 
 		try {
 			switch (portions[0]) {
@@ -84,16 +90,35 @@ public class MasterServlet extends HttpServlet {
 						if (portions.length == 2) {
 							int reimbId = Integer.parseInt(portions[1]);
 							rc.getReimbursement(res, reimbId);
-						} else if (portions.length == 1) {
+						}else if (portions.length == 1) {
 							rc.getAllReimbursement(res);
+						}else if(portions[1].equals("findallreimbursementstatus")){
+							rc.findAllReimbursementStatus(res);
+						}else if(portions[1].equals("findallreimbursementtype")) {
+							rc.findAllReimbursementType(res);
+						}else if(portions[1].equals(System.currentTimeMillis())) {
+							int reimbId = Integer.parseInt(portions[1]);
+							//COULD ALSO DO REIMBRESOLVER INSTEAD HERE TO DO EMPLOYEE PAST REQUESTS
+							Timestamp reimbResolved = new Timestamp(System.currentTimeMillis());
+							rc.getPastReimbursement(res, reimbId, reimbResolved);
+						}else if(portions[1].equals("findreimbursementbyauthor")) {
+							int reimbAuthor = Integer.parseInt(portions[2]);
+							rc.findReimbursementByAuthor(res, reimbAuthor);
 						}
-					} else if (req.getMethod().equals("POST")) {
-						rc.addReimbursement(req, res);
 					}
+					if(req.getMethod().equals("POST")) {
+							rc.addReimbursement(req, res);
+						}
+					if (req.getMethod().equals("PUT")) {
+						if(portions[1].equals("reimbursementStatus")){
+							int reimbStatusId = Integer.parseInt(portions[2]);
+							rc.updateReimbursementStatus(req, res, reimbStatusId);
+						}
 				
 				} else {
 					res.setStatus(403);
 					res.getWriter().println("You must be logged in to do that!");
+				}
 				}
 				break;
 				
@@ -116,6 +141,11 @@ public class MasterServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doGet(req, res);
+	}
+	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doGet(req, res);
 	}
 

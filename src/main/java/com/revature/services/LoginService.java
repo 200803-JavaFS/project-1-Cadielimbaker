@@ -21,13 +21,13 @@ public class LoginService {
 		}
 
 	}
+	}	
 		
 		
 		
-		
-	//UsersDAO udao = new UsersDAO();	
-//	Users u = udao.selectByUserName(l.userName);
-//		
+//		UsersDAO udao = new UsersDAO();	
+//		public boolean login(LoginDTO l) {
+//		Users u = udao.selectByUserName(l.userName);
 //		StringBuilder tempPassword = new StringBuilder();
 //		tempPassword.append(l.password.hashCode());
 //		String hashPassword = tempPassword.toString();
@@ -45,4 +45,5 @@ public class LoginService {
 //		return udao.selectByUserName(userName);
 //		
 //	}
-}
+//}
+

@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class ReimbursementService {
 
 	private static IReimbursementDAO rdao = new ReimbursementDAO();
 	private static IUserRolesDAO urdao = new UserRolesDAO();
+	private static IUsersDAO udao = new UsersDAO();
 	private static final Logger log = LogManager.getLogger(UsersService.class); //WOULD LIKE TO FIGURE OUT HOW TO IMPLEMENT LOGGING
 	
 	
@@ -39,13 +41,14 @@ public class ReimbursementService {
 		return rdao.addReimbursement(r);
 	}
 
-	public void updateReimbursementStatus(String reimbStatus, int reimbStatusId) {
-		rdao.updateReimbursementStatus(reimbStatus, reimbStatusId);
+	public void updateReimbursement(ReimbursementStatus rs,int reimbId, int reimbResolver) {
+		Reimbursement r = rdao.selectByReimbId(reimbId);
+		r.setReimbStatusId(rs);
+		Users u = udao.selectByUsersId(reimbResolver);
+		r.setReimbResolver(u);
+		rdao.updateReimbursement(r);
 	}
 
-	public void updateReimbursementType(String reimbType, int reimbTypeId) {
-		rdao.updateReimbursementType(reimbType, reimbTypeId);
-	}
 
 	public Reimbursement selectByReimbId(int reimbId) {
 		return rdao.selectByReimbId(reimbId);
@@ -78,5 +81,9 @@ public class ReimbursementService {
 	
 	public List<ReimbursementType> findAllReimbursementType() {
 		return rdao.findAllReimbursementType();
+	}
+
+	public Reimbursement selectByReimbResolved(Timestamp reimbResolved) {
+		return rdao.selectByReimbResolved(reimbResolved);
 	}
 }

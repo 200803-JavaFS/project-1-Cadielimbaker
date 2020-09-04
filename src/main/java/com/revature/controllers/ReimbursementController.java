@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,19 @@ public class ReimbursementController {
 		
 	}
 	
+	public void getPastReimbursement(HttpServletResponse res, int reimbId, Timestamp reimbResolved) throws IOException {
+		Reimbursement r = rs.selectByReimbId(reimbId);
+		Reimbursement rr = rs.selectByReimbResolved(reimbResolved);
+		if(r == null || rr != null) {
+			res.setStatus(204);
+		} else {
+			res.setStatus(200);
+			String json = om.writeValueAsString(r);
+			res.getWriter().println(json);
+		}
+		
+	}
+	
 	public void getAllReimbursement(HttpServletResponse res) throws IOException {
 		List<Reimbursement> all = rs.findAllReimbursement();
 		res.getWriter().println(om.writeValueAsString(all));
@@ -45,6 +59,12 @@ public class ReimbursementController {
 	
 	public void findAllReimbursementType(HttpServletResponse res) throws IOException {
 		List<ReimbursementType> all = rs.findAllReimbursementType();
+		res.getWriter().println(om.writeValueAsString(all));
+		res.setStatus(200);
+	}
+	
+	public void findReimbursementByAuthor(HttpServletResponse res, int reimbAuthor) throws IOException {
+		List<Reimbursement> all = rs.findReimbursementByAuthor(reimbAuthor);
 		res.getWriter().println(om.writeValueAsString(all));
 		res.setStatus(200);
 	}
@@ -76,6 +96,7 @@ public class ReimbursementController {
 			res.setStatus(403);
 		}
 }
+	//HELLLLLLPPPPPPP
 	public void updateReimbursementStatus(HttpServletRequest req, HttpServletResponse res, int reimbStatusId) throws IOException {
 		ReimbursementStatus rstatus = rs.selectByReimbStatusId(reimbStatusId);
 		res.setStatus(200);
@@ -92,10 +113,10 @@ public class ReimbursementController {
 	
 		String body = new String(s);
 		System.out.println(body);
-		String reimbStatus = om.updateValue(body, ReimbursementStatus.class);
-		System.out.println(reimbStatus);
+		Integer reimbId = om.convertValue(body, Integer.class);
+		System.out.println(reimbId);
 		
-		rs.updateReimbursementStatus(reimbStatus, reimbStatusId); 
+		rs.updateReimbursement(rstatus, reimbId.intValue(), reimbResolver); 
 		res.setStatus(201);
 		res.getWriter().println("The Reimbursement Status was updated!");
 		
