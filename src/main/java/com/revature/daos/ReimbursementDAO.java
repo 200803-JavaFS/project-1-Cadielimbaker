@@ -239,4 +239,11 @@ public class ReimbursementDAO implements IReimbursementDAO{
 		
 		return null;
 	}
+
+	@Override
+	public List<Reimbursement> findReimbursementByReimbResolver(int reimbResolver) {
+		Session ses = HibernateUtil.getSession();
+		List<Reimbursement> tickets = ses.createQuery("FROM Reimbursement WHERE reimbResolver=" +reimbResolver).list();
+		return tickets;
+	}
 }

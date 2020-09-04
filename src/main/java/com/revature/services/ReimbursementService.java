@@ -13,7 +13,9 @@ import com.revature.daos.IUsersDAO;
 import com.revature.daos.ReimbursementDAO;
 import com.revature.daos.UserRolesDAO;
 import com.revature.daos.UsersDAO;
+import com.revature.models.AddReimbursementDTO;
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementDTO;
 import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 import com.revature.models.UserRoles;
@@ -37,16 +39,29 @@ public class ReimbursementService {
 		
 	}
 	
-	public boolean addReimbursement(Reimbursement r) {
-		return rdao.addReimbursement(r);
+	public boolean addReimbursement(AddReimbursementDTO ardto, int usersId) {
+		Reimbursement r = new Reimbursement();
+		r.setReimbAuthor(udao.selectByUsersId(usersId));
+		r.setReimbAmount(ardto.reimbAmount);
+		r.setReimbDescription(ardto.reimbDescription);
+		r.setReimbTypeId(rdao.selectByReimbTypeId(ardto.reimbTypeId));
+		if(rdao.addReimbursement(r)) {
+			return true;
+		}
+		return false;
 	}
+	
 
-	public void updateReimbursement(ReimbursementStatus rs,int reimbId, int reimbResolver) {
-		Reimbursement r = rdao.selectByReimbId(reimbId);
+	public boolean updateReimbursement(ReimbursementDTO rdto, int usersId) {
+		Reimbursement r = rdao.selectByReimbId(rdto.reimbId);
+		ReimbursementStatus rs = rdao.selectByReimbStatusId(rdto.reimbStatusId);
 		r.setReimbStatusId(rs);
-		Users u = udao.selectByUsersId(reimbResolver);
-		r.setReimbResolver(u);
+		//Users u = udao.selectByUsersId(reimbResolver);
+		r.setReimbResolver(udao.selectByUsersId(usersId));
+		//r.setReimbResolved(new Timestamp(System.currentTimeMillis()));
 		rdao.updateReimbursement(r);
+		System.out.println("Reimbursement was updated!");
+		return true;
 	}
 
 
@@ -85,5 +100,9 @@ public class ReimbursementService {
 
 	public Reimbursement selectByReimbResolved(Timestamp reimbResolved) {
 		return rdao.selectByReimbResolved(reimbResolved);
+	}
+
+	public List<Reimbursement> findReimbursementByReimbResolver(int reimbAuthor) {
+		return rdao.findReimbursementByAuthor(reimbAuthor);
 	}
 }

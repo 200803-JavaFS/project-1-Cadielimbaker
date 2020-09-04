@@ -37,5 +37,7 @@ public interface IReimbursementDAO {
 	public Reimbursement selectByReimbResolved(Timestamp reimbResolved);
 
 	public boolean updateReimbursement(Reimbursement r);
+	
+	public List<Reimbursement> findReimbursementByReimbResolver(int reimbAuthor);
 
 }

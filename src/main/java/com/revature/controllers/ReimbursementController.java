@@ -7,9 +7,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.models.AddReimbursementDTO;
 import com.revature.models.Reimbursement;
+import com.revature.models.ReimbursementDTO;
 import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 import com.revature.services.ReimbursementService;
@@ -69,6 +72,11 @@ public class ReimbursementController {
 		res.setStatus(200);
 	}
 
+	public void findReimbursementByResolver(HttpServletResponse res, int reimbResolver) throws IOException {
+		List<Reimbursement> all = rs.findReimbursementByReimbResolver(reimbResolver);
+		res.getWriter().println(om.writeValueAsString(all));
+		res.setStatus(200);
+	}
 	public void addReimbursement(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		BufferedReader reader = req.getReader();
 		
@@ -82,27 +90,25 @@ public class ReimbursementController {
 		}
 		
 		String body = new String(s);
-		
 		System.out.println(body);
+		AddReimbursementDTO ardto = om.readValue(body, AddReimbursementDTO.class);
+		Integer usersId = (Integer) req.getSession().getAttribute("usersId");
 		
-		Reimbursement r = om.readValue(body, Reimbursement.class);
-		
-		System.out.println(r);
-		
-		if (rs.addReimbursement(r)) {
-			res.setStatus(201);
-			res.getWriter().println("A Reimbursement was added!");
-		} else {
-			res.setStatus(403);
+		if(rs.addReimbursement(ardto,usersId.intValue())) {
+			res.setStatus(200);
 		}
-}
+		else {
+			res.setStatus(401);
+		}
+	}
+	
 	//HELLLLLLPPPPPPP
-	public void updateReimbursementStatus(HttpServletRequest req, HttpServletResponse res, int reimbStatusId) throws IOException {
-		ReimbursementStatus rstatus = rs.selectByReimbStatusId(reimbStatusId);
-		res.setStatus(200);
-		String json = om.writeValueAsString(rstatus);
-		res.getWriter().println(json);
-		
+	public void updateReimbursementStatus(HttpServletRequest req, HttpServletResponse res) throws IOException {
+//		ReimbursementStatus rstatus = rs.selectByReimbStatusId(reimbStatusId);
+//		res.setStatus(200);
+//		String json = om.writeValueAsString(rstatus);
+//		res.getWriter().println(json);
+//		
 		BufferedReader reader = req.getReader();
 		StringBuilder s = new StringBuilder();
 		String line = reader.readLine();
@@ -112,45 +118,22 @@ public class ReimbursementController {
 		line = reader.readLine();
 	
 		String body = new String(s);
-		System.out.println(body);
-		Integer reimbId = om.convertValue(body, Integer.class);
-		System.out.println(reimbId);
+		ReimbursementDTO rdto = om.readValue(body, ReimbursementDTO.class);
+		HttpSession ses = req.getSession();
+		Integer usersId = (Integer)ses.getAttribute("usersId");
 		
-		rs.updateReimbursement(rstatus, reimbId.intValue(), reimbResolver); 
+		if(rs.updateReimbursement(rdto, usersId.intValue())) {
+			
 		res.setStatus(201);
 		res.getWriter().println("The Reimbursement Status was updated!");
 		
 		}else {
 			res.setStatus(403);
 		}
+		}
 	}
 
-	public void updateReimbursementType(HttpServletRequest req, HttpServletResponse res, int reimbTypeId) throws IOException {
-		ReimbursementType rtype = rs.selectByReimbTypeId(reimbTypeId);
-		res.setStatus(200);
-		String json = om.writeValueAsString(rtype);
-		res.getWriter().println(json);
-		
-		BufferedReader reader = req.getReader();
-		StringBuilder s = new StringBuilder();
-		String line = reader.readLine();
-		
-		if(line != null) {
-		s.append(line);
-		line = reader.readLine();
-		
-		String body = new String(s);
-		System.out.println(body);
-		String reimbType = om.updateValue(body, ReimbursementType.class);
-		System.out.println(reimbType);
-		
-		rs.updateReimbursementType(reimbType, reimbTypeId);
-		res.getWriter().println("The Reimbursement Type was updated!");
-		
-	}else {
-		res.setStatus(403);
-	}
-}
+	
 	public void addReimbursementStatus(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		BufferedReader reader = req.getReader();
 		
