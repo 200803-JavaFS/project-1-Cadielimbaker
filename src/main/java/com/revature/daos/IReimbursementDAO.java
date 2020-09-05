@@ -29,15 +29,15 @@ public interface IReimbursementDAO {
 	public boolean addReimbursementWithStatus(Reimbursement r);
 
 	public List<Reimbursement> findReimbursementByAuthor(int reimbAuthor);
-	
-	public List<ReimbursementStatus> findAllReimbursementStatus();
 
-	public List<ReimbursementType> findAllReimbursementType();
+	public List<ReimbursementType> findAllReimbursementType(int reimbTypeId);
 
 	public Reimbursement selectByReimbResolved(Timestamp reimbResolved);
 
 	public boolean updateReimbursement(Reimbursement r);
 	
 	public List<Reimbursement> findReimbursementByReimbResolver(int reimbAuthor);
+
+	public List<ReimbursementStatus> findAllReimbursementStatus(int reimbStatusId);
 
 }

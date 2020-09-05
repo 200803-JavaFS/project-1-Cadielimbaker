@@ -25,26 +25,26 @@ public class Driver {
 	
 	public static void main(String[]args) {
 		//addUser1();
-		//insertUser3();
-		addReimbursement1();
+		insertUser3();
+		//addReimbursement1();
 		//addReimbursement2();
 		
 	}
 
-//	private static void insertUser3() {
-//		String p3 = "password4";
-//		StringBuilder sb = new StringBuilder();
-//		sb.append(p3.hashCode());
-//		String hashp4 = sb.toString();
-//		
-//		UserRoles ur3 = urdao.selectByUserRole(1);
-//		System.out.println(ur3);
-//		Users u = new Users ("melissalimbaker",hashp4, "melissa", "limbaker", "melissalimbaker@email.com", ur3);
-//
-//		udao.insert(u);
-//		System.out.println(u);
-//		
-//	}
+	private static void insertUser3() {
+		String p3 = "password4";
+		StringBuilder sb = new StringBuilder();
+		sb.append(p3.hashCode());
+		String hashp4 = sb.toString();
+		
+		UserRoles ur3 = urdao.selectByUserRole(2);
+		System.out.println(ur3);
+		Users u = new Users ("carolinelimbaker",hashp4, "caroline", "limbaker", "carolinelimbaker@email.com", ur3);
+
+		udao.insert(u);
+		System.out.println(u);
+		
+	}
 	
 	private static void addReimbursement1() {
 		ReimbursementStatus rs1 = rdao.selectByReimbStatusId(1);

@@ -90,12 +90,12 @@ public class ReimbursementService {
 		
 	}
 
-	public List<ReimbursementStatus> findAllReimbursementStatus() {
-		return rdao.findAllReimbursementStatus();
+	public List<ReimbursementStatus> findAllReimbursementStatus(int reimbStatusId) {
+		return rdao.findAllReimbursementStatus(reimbStatusId);
 	}
 	
-	public List<ReimbursementType> findAllReimbursementType() {
-		return rdao.findAllReimbursementType();
+	public List<ReimbursementType> findAllReimbursementType(int reimbTypeId) {
+		return rdao.findAllReimbursementType(reimbTypeId);
 	}
 
 	public Reimbursement selectByReimbResolved(Timestamp reimbResolved) {

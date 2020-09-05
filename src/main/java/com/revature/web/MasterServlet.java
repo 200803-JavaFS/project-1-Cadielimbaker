@@ -43,22 +43,22 @@ public class MasterServlet extends HttpServlet {
 		System.out.println(Arrays.toString(portions));
 		
 		if ((portions[0]).equals("reimbursement")) {
-			if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
+			if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("loggedin")) {
 				if (portions.length == 2) {
 					int reimbId = Integer.parseInt(portions[1]);
 					rc.getReimbursement(res, reimbId);
 				}else if (portions.length == 1) {
 					rc.getAllReimbursement(res);
-				}else if(portions[2].equals("findallreimbursementstatus")){
-					rc.findAllReimbursementStatus(res);
-				}else if(portions[2].equals("findallreimbursementtype")) {
-					rc.findAllReimbursementType(res);
-				}else if(portions[2].equals(System.currentTimeMillis())) {
-					int reimbId = Integer.parseInt(portions[1]);
-					//COULD ALSO DO REIMBRESOLVER INSTEAD HERE TO DO EMPLOYEE PAST REQUESTS
-					Timestamp reimbResolved = new Timestamp(System.currentTimeMillis());
-					rc.getPastReimbursement(res, reimbId, reimbResolved);
-				}else if(portions[1].equals("findreimbursementbyauthor")) {
+				}else if(portions.length == 3 && portions[1].equals("finallreimbursementstatus")){
+					int reimbStatusId = Integer.parseInt(portions[2]);
+					rc.findAllReimbursementStatus(res, reimbStatusId);
+				}else if(portions.length == 3 && portions[1].equals("findallreimbursementtype")) {
+					int reimbTypeId = Integer.parseInt(portions[2]);
+					rc.findAllReimbursementType(res, reimbTypeId);
+				}else if(portions.length == 3 && portions[1].equals("findreimbursementbyresolver")) {
+					int reimbResolver = Integer.parseInt(portions[2]);
+					rc.findReimbursementByResolver(res, reimbResolver);
+				}else if(portions.length == 3 && portions[1].equals("findreimbursementbyauthor")) {
 					int reimbAuthor = Integer.parseInt(portions[2]);
 					rc.findReimbursementByAuthor(res, reimbAuthor);
 				}
@@ -182,7 +182,7 @@ public class MasterServlet extends HttpServlet {
 //			case "Reimbursement":
 //				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
 //					if (req.getMethod().equals("GET")) {
-//						if (portions[2]!=("")) {
+//						if (portions.length==2) {
 //							int reimbId = Integer.parseInt(portions[1]);
 //							rc.getReimbursement(res, reimbId);
 //						}else if (portions.length == 2) {

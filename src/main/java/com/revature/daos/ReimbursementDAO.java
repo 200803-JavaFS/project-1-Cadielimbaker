@@ -202,10 +202,10 @@ public class ReimbursementDAO implements IReimbursementDAO{
 	}
 
 	@Override
-	public List<ReimbursementStatus> findAllReimbursementStatus() {
+	public List<ReimbursementStatus> findAllReimbursementStatus(int reimbStatusId) {
 		Session ses = HibernateUtil.getSession();
 		try {
-			List<ReimbursementStatus> rslist = ses.createQuery("From ReimbursementStatus").list();
+			List<ReimbursementStatus> rslist = ses.createQuery("From ReimbursementStatus=" +reimbStatusId).list();
 			return rslist;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -214,10 +214,10 @@ public class ReimbursementDAO implements IReimbursementDAO{
 	}
 	
 	@Override
-	public List<ReimbursementType> findAllReimbursementType() {
+	public List<ReimbursementType> findAllReimbursementType(int reimbTypeId) {
 		Session ses = HibernateUtil.getSession();
 		try {
-			List<ReimbursementType> rtlist = ses.createQuery("From ReimbursementType").list();
+			List<ReimbursementType> rtlist = ses.createQuery("From ReimbursementType=" +reimbTypeId).list();
 			return rtlist;
 		}catch(Exception e) {
 			e.printStackTrace();

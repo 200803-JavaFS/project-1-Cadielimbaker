@@ -54,14 +54,14 @@ public class ReimbursementController {
 		res.setStatus(200);
 	}
 	
-	public void findAllReimbursementStatus(HttpServletResponse res) throws IOException {
-		List<ReimbursementStatus> all = rs.findAllReimbursementStatus();
+	public void findAllReimbursementStatus(HttpServletResponse res, int reimbStatusId) throws IOException {
+		List<ReimbursementStatus> all = rs.findAllReimbursementStatus(reimbStatusId);
 		res.getWriter().println(om.writeValueAsString(all));
 		res.setStatus(200);
 	}
 	
-	public void findAllReimbursementType(HttpServletResponse res) throws IOException {
-		List<ReimbursementType> all = rs.findAllReimbursementType();
+	public void findAllReimbursementType(HttpServletResponse res, int reimbTypeId) throws IOException {
+		List<ReimbursementType> all = rs.findAllReimbursementType(reimbTypeId);
 		res.getWriter().println(om.writeValueAsString(all));
 		res.setStatus(200);
 	}
