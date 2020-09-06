@@ -30,7 +30,7 @@ public interface IReimbursementDAO {
 
 	public List<Reimbursement> findReimbursementByAuthor(int reimbAuthor);
 
-	public List<ReimbursementType> findAllReimbursementType(int reimbTypeId);
+	public List<Reimbursement> findAllReimbursementType(int reimbTypeId);
 
 	public Reimbursement selectByReimbResolved(Timestamp reimbResolved);
 
@@ -38,6 +38,6 @@ public interface IReimbursementDAO {
 	
 	public List<Reimbursement> findReimbursementByReimbResolver(int reimbAuthor);
 
-	public List<ReimbursementStatus> findAllReimbursementStatus(int reimbStatusId);
+	public List<Reimbursement> findAllReimbursementStatus(int reimbStatusId);
 
 }

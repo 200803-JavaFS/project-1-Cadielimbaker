@@ -90,11 +90,11 @@ public class ReimbursementService {
 		
 	}
 
-	public List<ReimbursementStatus> findAllReimbursementStatus(int reimbStatusId) {
+	public List<Reimbursement> findAllReimbursementStatus(int reimbStatusId) {
 		return rdao.findAllReimbursementStatus(reimbStatusId);
 	}
 	
-	public List<ReimbursementType> findAllReimbursementType(int reimbTypeId) {
+	public List<Reimbursement> findAllReimbursementType(int reimbTypeId) {
 		return rdao.findAllReimbursementType(reimbTypeId);
 	}
 

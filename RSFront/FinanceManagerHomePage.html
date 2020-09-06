@@ -10,49 +10,9 @@
 </head>
 <body>
     <main class="container">
-        <div class="row">
-            <div class="col">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <button type="button" class="btn btn-secondary">Back To Login</button>
-                  
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Reimbursements
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" id="fiterbystatus" href="Status.html" target="_blank">Filter By Status</a>
-                        <a class="dropdown-item" id="filterbytype" href="#">Filter By Type</a>
-                        <a class="dropdown-item" id="viewallreimbursement" href="#">View All Reimbursements</a>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-
-
-                  <!-- <main name="container2">
-                  <div class="row" id="table3-row">
-                    <table class="table-hover table-bordered" id="table3">
-                        <thead>
-                            <tr>
-                                <th>reimbId</th>
-                                <th>reimbAmount</th>
-                                <th>reimbSubmitted</th>
-                                <th>reimbResolved</th>
-                                <th>ReimbDescription</th>
-                                <th>reimbAuthor</th>
-                                <th>reimbResolver</th>
-                                <th>reimbStatusId</th>
-                                <th>reimbTypeId</th>
-                            </tr>
-                        </thead>
-                        <tbody id="rbody">
-                        </tbody>
-                    </table>
-                </div>
-              </main> -->
-        </div>
+      
         <h3>Add Reimbursement</h3>
-        <form>
+        <div>
           <div class="form-group row">
             <label for="inputreimbAuthor" class="col-sm-3 col-form-label">UserID</label>
             <div class="col-sm-10">
@@ -198,11 +158,40 @@
               <button type="submit" class="btn btn-primary">SUBMIT</button>
             </div>
           </div>
-        </form>
+        </div>
       </area>
+      <br>
+      <br>
+      <div class="container">
+        <div class="row" id="table-row">
+            <table class="table-hover table-bordered" id="rtable">
+                <thead>
+                    <tr>
+                        <th>reimbId</th>
+                        <th>reimbAmount</th>
+                        <th>reimbDescription</th>
+                        <th>reimbAuthor</th>
+                        <th>reimbResolver</th>
+                        <th>reimbStatusId</th>
+                        <th>reimbTypeId</th>
+                    </tr>
+                </thead>
+                <tbody id="rbody">
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <br>
+        <div class="form-group row-2">
+          <div class="col-sm-10">
+            <button id= "rtablebtn" type="submit" class="btn btn-primary">SUBMIT</button>
+          </div>
+          </div>
+      
     </main>
     
     <script src="Reimbursement.js"></script>
+    <script src="FinanceManagerHomePage.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 crossorigin="anonymous"></script>
