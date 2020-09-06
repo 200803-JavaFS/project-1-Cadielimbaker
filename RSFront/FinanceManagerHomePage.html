@@ -79,7 +79,7 @@
           </div>
           <div class="form-group row">
             <div class="col-sm-10">
-              <button type="submit" id="button2" class="btn btn-primary">SUBMIT</button>
+              <button type="submit" id="addreimbursementbtn" class="btn btn-primary">SUBMIT</button>
             </div>
           </div>
         </form>
@@ -184,13 +184,41 @@
         <br>
         <div class="form-group row-2">
           <div class="col-sm-10">
-            <button id= "rtablebtn" type="submit" class="btn btn-primary">SUBMIT</button>
+            <button id= "rtablebtn" type="submit" class="btn btn-primary">View All Reimbursements</button>
           </div>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioPending" value="1">
+            <label class="form-check-label" for="inlineRadio1">PENDING</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioApproved" value="2">
+            <label class="form-check-label" for="inlineRadio2">APPROVED</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioDenied" value="3">
+            <label class="form-check-label" for="inlineRadio3">DENIED</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioLodging" value="1">
+            <label class="form-check-label" for="inlineRadio1">LODGING</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioTravel" value="2">
+            <label class="form-check-label" for="inlineRadio2">TRAVEL</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioFood" value="3">
+            <label class="form-check-label" for="inlineRadio3">FOOD</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioOther" value="4">
+            <label class="form-check-label" for="inlineRadio3">OTHER</label>
           </div>
       
     </main>
     
-    <script src="Reimbursement.js"></script>
+    
     <script src="FinanceManagerHomePage.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
