@@ -3,24 +3,30 @@ package com.revature.controllers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.AddReimbursementDTO;
+import com.revature.models.LoginDTO;
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementDTO;
 import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 import com.revature.services.ReimbursementService;
+import com.revature.models.Users;
+import com.revature.services.UsersService;
 
 public class ReimbursementController {
 
 
 	private static ReimbursementService rs = new ReimbursementService();
+	private static UsersService us = new UsersService();
 	private static ObjectMapper om = new ObjectMapper();
 	
 	public void getReimbursement(HttpServletResponse res, int reimbId) throws IOException {
@@ -103,36 +109,36 @@ public class ReimbursementController {
 		}
 	}
 	
-	//HELLLLLLPPPPPPP
-	public void updateReimbursementStatus(HttpServletRequest req, HttpServletResponse res) throws IOException {
-//		ReimbursementStatus rstatus = rs.selectByReimbStatusId(reimbStatusId);
-//		res.setStatus(200);
-//		String json = om.writeValueAsString(rstatus);
-//		res.getWriter().println(json);
+//	//HELLLLLLPPPPPPP
+//	public void updateReimbursementStatus(HttpServletRequest req, HttpServletResponse res) throws IOException {
+////		ReimbursementStatus rstatus = rs.selectByReimbStatusId(reimbStatusId);
+////		res.setStatus(200);
+////		String json = om.writeValueAsString(rstatus);
+////		res.getWriter().println(json);
+////		
+//		BufferedReader reader = req.getReader();
+//		StringBuilder s = new StringBuilder();
+//		String line = reader.readLine();
+//
+//		if(line !=null) {
+//		s.append(line);
+//		line = reader.readLine();
+//	
+//		String body = new String(s);
+//		ReimbursementDTO rdto = om.readValue(body, ReimbursementDTO.class);
+//		HttpSession ses = req.getSession();
+//		Integer usersId = (Integer)ses.getAttribute("usersId");
 //		
-		BufferedReader reader = req.getReader();
-		StringBuilder s = new StringBuilder();
-		String line = reader.readLine();
-
-		if(line !=null) {
-		s.append(line);
-		line = reader.readLine();
-	
-		String body = new String(s);
-		ReimbursementDTO rdto = om.readValue(body, ReimbursementDTO.class);
-		HttpSession ses = req.getSession();
-		Integer usersId = (Integer)ses.getAttribute("usersId");
-		
-		if(rs.updateReimbursement(rdto, usersId.intValue())) {
-			
-		res.setStatus(201);
-		res.getWriter().println("The Reimbursement Status was updated!");
-		
-		}else {
-			res.setStatus(403);
-		}
-		}
-	}
+//		if(rs.updateReimbursement(rdto, usersId.intValue())) {
+//		
+//		res.setStatus(201);
+//		res.getWriter().println("The Reimbursement Status was updated!");
+//		
+//		}else {
+//			res.setStatus(403);
+//		}
+//		}
+//	}
 
 	
 	public void addReimbursementStatus(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -190,6 +196,71 @@ public class ReimbursementController {
 			res.setStatus(403);
 		}
 }
+	public void updateR(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		
+		
+		BufferedReader reader = req.getReader();
+		
+		StringBuilder sb = new StringBuilder();
+		
+		String line = reader.readLine();
+		
+		while(line != null) {
+			sb.append(line);
+			line = reader.readLine();
+		}
+		
+		String body = new String(sb);
+		
+		AddReimbursementDTO ardto = om.readValue(body, AddReimbursementDTO.class);
+		
+		if(rs.updateReimbursement(ardto)) {
+			res.setStatus(201);
+			res.getWriter().println("Status Changed");
+		}
+		else {
+			res.setStatus(403);
+		}
 	}
+
+public void findByUname(HttpServletRequest req, HttpServletResponse res) throws IOException{
+	HttpSession ses = req.getSession(false);
+	LoginDTO l = (LoginDTO) ses.getAttribute("user");
+	System.out.println(l.userName);
+    Users u = us.selectByUsername(l.userName);
+    
+    List<Reimbursement> rList = rs.findReimbursementByAuthor(u.getUsersId());
+    List<AddReimbursementDTO> ardtoList = new ArrayList<>();
+    res.setStatus(200);
+    AddReimbursementDTO ardto = new AddReimbursementDTO();
+    for (Reimbursement r: rList) {
+    	ardto.reimbAuthor = Integer.toString(r.getReimbAuthor().getUsersId());
+		ardto.reimbAmount = r.getReimbAmount();
+		ardto.reimbId = r.getReimbId();
+		if(r.getReimbResolver()!= null) {
+			ardto.reimbResolver = Integer.toString(r.getReimbResolver().getUsersId());
+		}
+		else {
+			ardto.reimbResolver = null;
+		}
+		ardto.reimbDescription = r.getReimbDescription();
+		ardto.reimbStatusId = (r.getReimbStatusId().getReimbStatusId());
+		ardto.reimbTypeId = (r.getReimbTypeId().getReimbTypeId());
+		ardtoList.add(ardto);
+	}
+	System.out.println(ardtoList.toString());
+	
+	
+	try {
+		res.getWriter().println(om.writeValueAsString(ardtoList));
+	} catch (JsonProcessingException e) {
+			res.setStatus(400);
+		e.printStackTrace();
+	} catch (IOException e) {
+			res.setStatus(401);
+		e.printStackTrace();
+	}
+    }
+}
 
 

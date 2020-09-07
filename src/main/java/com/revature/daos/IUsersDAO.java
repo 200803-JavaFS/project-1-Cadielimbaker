@@ -23,6 +23,7 @@ public interface IUsersDAO {
 	public Users selectByUserRoleId(int userRoleId);
 
 	public boolean addUsers(Users u);
+
 	
 }
 

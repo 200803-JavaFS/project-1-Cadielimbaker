@@ -56,18 +56,47 @@ public class ReimbursementService {
 	}
 	
 
-	public boolean updateReimbursement(ReimbursementDTO rdto, int usersId) {
+//	public boolean updateReimbursement(ReimbursementDTO rdto, int usersId) {
+//		log.info("Updating a reimbursement");
+//		Reimbursement r = rdao.selectByReimbId(rdto.reimbId);
+//		ReimbursementStatus rs = rdao.selectByReimbStatusId(rdto.reimbStatusId);
+//		r.setReimbStatusId(rs);
+//		//Users u = udao.selectByUsersId(reimbResolver);
+//		r.setReimbResolver(udao.selectByUsersId(usersId));
+//		//r.setReimbResolved(new Timestamp(System.currentTimeMillis()));
+//		rdao.updateReimbursement(r);
+//		System.out.println("Reimbursement was updated!");
+//		return true;
+//	}
+
+	public boolean updateReimbursement(AddReimbursementDTO ardto) {
 		log.info("Updating a reimbursement");
-		Reimbursement r = rdao.selectByReimbId(rdto.reimbId);
-		ReimbursementStatus rs = rdao.selectByReimbStatusId(rdto.reimbStatusId);
+		Reimbursement r = rdao.selectByReimbId(ardto.reimbId);
+		ReimbursementStatus rs = rdao.selectByReimbStatusId(ardto.reimbStatusId);
 		r.setReimbStatusId(rs);
 		//Users u = udao.selectByUsersId(reimbResolver);
-		r.setReimbResolver(udao.selectByUsersId(usersId));
+		r.setReimbResolver(udao.selectByUserName(ardto.reimbAuthor));
 		//r.setReimbResolved(new Timestamp(System.currentTimeMillis()));
 		rdao.updateReimbursement(r);
 		System.out.println("Reimbursement was updated!");
 		return true;
 	}
+
+	public boolean addReimbursement(AddReimbursementDTO ardto) {
+		Reimbursement r = new Reimbursement();
+		double reimbAmount = ardto.reimbAmount;
+		int reimbTypeId = ardto.reimbTypeId;
+		
+		r.setReimbAuthor(udao.selectByUserName(ardto.reimbAuthor));
+		r.setReimbAmount(reimbAmount);
+		r.setReimbDescription(ardto.reimbDescription);
+		r.setReimbStatusId(rdao.selectByReimbStatusId(ardto.reimbStatusId));
+		r.setReimbTypeId(rdao.selectByReimbTypeId(reimbTypeId));
+		if(rdao.addReimbursement(r)) {
+			return true;
+		}
+		return false;
+}
 
 
 	public Reimbursement selectByReimbId(int reimbId) {
@@ -121,8 +150,4 @@ public class ReimbursementService {
 		return rdao.findReimbursementByAuthor(reimbAuthor);
 	}
 	
-	public List<Reimbursement> getByLoginAuthor(String userName) {
-		
-		return ReimbursementDAO.selectByUserName(userName);
-	}
 }

@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import com.revature.controllers.LoginController;
 import com.revature.controllers.ReimbursementController;
@@ -35,41 +35,47 @@ public class MasterServlet extends HttpServlet {
 		res.setContentType("application/json");
 		
 		res.setStatus(404);
-
+		
 		final String URI = req.getRequestURI().replace("/project1/", "");
 
 		String[] portions = URI.split("/");
 
 		System.out.println(Arrays.toString(portions));
+		System.out.println(portions.length);
+		System.out.println((portions[0]));
 		
-		if ((portions[0]).equals("reimbursement")) {
-			if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("loggedin")) {
-				if (portions.length == 2) {
-					int reimbId = Integer.parseInt(portions[1]);
-					rc.getReimbursement(res, reimbId);
-				}else if (req.getMethod().equals("GET")) {
-					rc.getAllReimbursement(res);
-				}else if(portions.length == 3 && portions[1].equals("finallreimbursementstatus")){
-					int reimbStatusId = Integer.parseInt(portions[2]);
-					rc.findAllReimbursementStatus(res, reimbStatusId);
-//				}else if(portions.length == 3 && portions[1].equals("findallreimbursementtype")) {
-//					int reimbTypeId = Integer.parseInt(portions[2]);
-//					rc.findAllReimbursementType(res, reimbTypeId);
-//				}else if(portions.length == 3 && portions[1].equals("findreimbursementbyresolver")) {
-//					int reimbResolver = Integer.parseInt(portions[2]);
-//					rc.findReimbursementByResolver(res, reimbResolver);
-//				}else if(portions.length == 3 && portions[1].equals("findreimbursementbyauthor")) {
-//					int reimbAuthor = Integer.parseInt(portions[2]);
-//					rc.findReimbursementByAuthor(res, reimbAuthor);
-				}
-			} else {
-				res.setStatus(403);
-				res.getWriter().println("You must be logged in to do that!");
+		HttpSession ses = req.getSession(false);
+		System.out.println("@MS ses = " + ses);
+		if (ses != null && (boolean) ses.getAttribute("loggedin")==true) {
+		try {
+			switch (portions[0]) {
+				
+				case "reimbursement":
+					if(req.getMethod().equals("GET")) {
+						rc.getAllReimbursement(res);
+					}
+					break;				
+				case "reimbursementsbystatus":
+					int rsId = Integer.parseInt(portions[1]);
+					rc.findAllReimbursementStatus(res, rsId);
+					break;
+				case "reimbursementsbyemployee":
+					int empId = Integer.parseInt(portions[1]);
+					rc.findReimbursementByAuthor(res, empId);
+					break;
+				case "empreimbursementsearch":
+					System.out.println("@case emprsearch in MS");
+					rc.findByUname(req, res);
+					break;
 			}
-		} else {
-		res.setStatus(400);
-		}	 
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		}
+
 	}
+
 		
 
 	@Override
@@ -94,7 +100,7 @@ public class MasterServlet extends HttpServlet {
 				lc.login(req, res);	
 				break;
 				
-			case "reimbursement":
+			case "addR":
 				//log.info("@addreimbursement");
 				rc.addReimbursement(req, res);
 				break;
@@ -130,9 +136,8 @@ public class MasterServlet extends HttpServlet {
 
 		System.out.println(Arrays.toString(portions));
 		
-		if (URI.equals("reimbursement")) {
-			//log.info("@updatereimbursement")
-				rc.updateReimbursementStatus(req, res);	
+		if (URI.equals("changestatus")) {
+			rc.updateR(req, res);	
 		}
 		
 
