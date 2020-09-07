@@ -26,25 +26,29 @@ public class ReimbursementService {
 	private static IReimbursementDAO rdao = new ReimbursementDAO();
 	private static IUserRolesDAO urdao = new UserRolesDAO();
 	private static IUsersDAO udao = new UsersDAO();
-	private static final Logger log = LogManager.getLogger(UsersService.class); //WOULD LIKE TO FIGURE OUT HOW TO IMPLEMENT LOGGING
+	private static final Logger log = LogManager.getLogger(ReimbursementService.class); 
 	
 	
 	public List<Reimbursement> findAllReimbursement() {
+		log.info("find all reimbursements");
 		return rdao.findAllReimbursement();
 		
 	}
 	
 	public Reimbursement findByUsersId(int reimbId) {
+		log.info("Retrieving all reimbursements for user");
 		return rdao.selectByReimbId(reimbId);
 		
 	}
 	
 	public boolean addReimbursement(AddReimbursementDTO ardto, int usersId) {
+		log.info("Adding a reimbursement");
 		Reimbursement r = new Reimbursement();
 		r.setReimbAuthor(udao.selectByUsersId(usersId));
 		r.setReimbAmount(ardto.reimbAmount);
 		r.setReimbDescription(ardto.reimbDescription);
 		r.setReimbTypeId(rdao.selectByReimbTypeId(ardto.reimbTypeId));
+		r.setReimbStatusId(rdao.selectByReimbStatusId(ardto.reimbStatusId));
 		if(rdao.addReimbursement(r)) {
 			return true;
 		}
@@ -53,6 +57,7 @@ public class ReimbursementService {
 	
 
 	public boolean updateReimbursement(ReimbursementDTO rdto, int usersId) {
+		log.info("Updating a reimbursement");
 		Reimbursement r = rdao.selectByReimbId(rdto.reimbId);
 		ReimbursementStatus rs = rdao.selectByReimbStatusId(rdto.reimbStatusId);
 		r.setReimbStatusId(rs);
@@ -66,43 +71,58 @@ public class ReimbursementService {
 
 
 	public Reimbursement selectByReimbId(int reimbId) {
+		log.info("Getting reimbursements by reimbId");
 		return rdao.selectByReimbId(reimbId);
 	}
 
 	public ReimbursementStatus selectByReimbStatusId(int reimbStatusId) {
+		log.info("Retrieving reimbStatus by reimbStatusId");
 		return rdao.selectByReimbStatusId(reimbStatusId);
 	}
 
 	public ReimbursementType selectByReimbTypeId(int reimbTypeId) {
+		log.info("Retrieving reimbType by reimbTypeId");
 		return rdao.selectByReimbTypeId(reimbTypeId);
 	}
 
 	public ReimbursementStatus addReimbursementStatus(ReimbursementStatus reimbStatus) {
+		log.info("Adding a reimbursement status");
 		return rdao.addReimbursementStatus(reimbStatus);
 	}
 
 	public ReimbursementType addReimbursementType(ReimbursementType reimbType) {
+		log.info("Adding a reimbursement type");
 		return rdao.addReimbursementType(reimbType);
 	}
 
 	public List<Reimbursement> findReimbursementByAuthor(int reimbAuthor) {
+		log.info("Getting reimbursements by reimbAuthor");
 		return rdao.findReimbursementByAuthor(reimbAuthor);
 		
 	}
 
 	public List<Reimbursement> findAllReimbursementStatus(int reimbStatusId) {
+		log.info("Getting reimbursements by reimbStatusId");
 		return rdao.findAllReimbursementStatus(reimbStatusId);
 	}
 	
 	public List<Reimbursement> findAllReimbursementType(int reimbTypeId) {
+		log.info("Getting reimbursements by reimbTypeId");
 		return rdao.findAllReimbursementType(reimbTypeId);
 	}
 
 	public Reimbursement selectByReimbResolved(Timestamp reimbResolved) {
+		log.info("Getting reimbursements by reimbTypeId");
 		return rdao.selectByReimbResolved(reimbResolved);
 	}
 
 	public List<Reimbursement> findReimbursementByReimbResolver(int reimbAuthor) {
+		log.info("Getting reimbursements by reimbAuthor");
 		return rdao.findReimbursementByAuthor(reimbAuthor);
+	}
+	
+	public List<Reimbursement> getByLoginAuthor(String userName) {
+		
+		return ReimbursementDAO.selectByUserName(userName);
 	}
 }

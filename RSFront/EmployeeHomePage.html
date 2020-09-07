@@ -10,122 +10,116 @@
 </head>
 <body>
     <main class="container">
-        <div class="row">
-            <div class="col">
-                <!-- <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <button type="button" id="logout" class="btn btn-secondary">Back To Login</button>
-                  
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Reimbursements
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="#">View Past Reimbursements</a>
-                        <a class="dropdown-item" href="#">View All My Reimbursements</a>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-        </div> -->
-        <h3>Add Reimbursement</h3>
-        <div>
-          <div class="form-group row">
-            <label for="inputreimbAuthor" class="col-sm-3 col-form-label">UserID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="reimbAuthor" placeholder="UserID">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="inputdescription" class="col-sm-3 col-form-label"> Description</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="reimbDescription" placeholder="Description">
-            </div>
-            <div class="form-group row">
-              <label for="inputamount" class="col-sm-3 col-form-label"> Amount</label>
-              <div class="col-sm-10">
-                <input type="number" class="form-control" id="reimbAmount" placeholder="Amount">
-              </div>
-          </div>
-        </div>
-          <div class="row">
-            <div class="col-6">
-          <fieldset class="form-group">
-            <div class="row">
-              <legend class="col-form-label col-sm-2 pt-0">Type</legend>
-              <div class="col-sm-10">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="LODGING" value="option1" checked>
-                  <label class="form-check-label" for="reimbType">
-                    LODGING
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="TRAVEL" value="option2">
-                  <label class="form-check-label" for="reimbType">
-                    TRAVEL
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="FOOD" value="option3" disabled>
-                  <label class="form-check-label" for="reimbType">
-                    FOOD
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="OTHER" value="option4" disabled>
-                  <label class="form-check-label" for="reimbType">
-                    OTHER
-                  </label>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-      </div>
-          <div class="form-group row">
-            <div class="col-sm-1">Status</div>
-            <div class="col-sm-10">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck1">
-                <label class="form-check-label" for="gridCheck1">
-                  PENDING
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-10">
-              <button type="submit" class="btn btn-primary">SUBMIT</button>
-            </div>
-          </div>
-        </form>
-
-        <br>
-<br>
-<main class="container">
+      <div id="findfunc" class="container">
+      
+            <h3>Employee Reimbursement Request Portal</h3>
+        </header>
         <div class="row" id="table-row">
-            <table class="table-hover table-bordered" id="rtable">
-                <thead>
-                    <tr>
-                        <th>reimbId</th>
-                        <th>reimbAmount</th>
-                        <th>reimbDescription</th>
-                        <th>reimbAuthor</th>
-                        <th>reimbResolver</th>
-                        <th>reimbStatusId</th>
-                        <th>reimbTypeId</th>
-                    </tr>
-                </thead>
-                <tbody id="rbody">
-                </tbody>
-            </table>
+            <div class="col">
+                <h3>View All</h3>
+                <button id="findfuncbtn"  class="btn">List All Reimbursements</button>
+            </div>
+            <div class="col">
+                <button id="findfuncbtn1" type = "submit" class="btn">View Reimbursements By Status</button>
+            </div>
+                <button id="findfuncbtn2" type="submit" class="btn">Submit a Reimbursement</button>
+            </div>
+            </div>
+                <button id="findfuncbtn3" type="submit" class="btn">Logout</button>
+            </div>
+        <table class="table-hover table-bordered" id="rtable">
+            <thead>
+                <tr>
+                    <th> Reimbursement Id </th>
+                    <th> Amount ($) </th>
+                    <th> Date Submitted </th>
+                    <th> Date Resolved </th>
+                    <th> Description </th>
+                    <th> Employee Id </th>
+                    <th> Resolver </th>
+                    <th> Reimbursement Status </th>
+                    <th> Reimbursement Type </th>
+                </tr>
+            </thead>
+            <tbody id="rbody">
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <div class="row" id="table-row">
+            <h3>View By Status</h3>
+                <div class="form-group">
+                    <p>1=Pending, 2=Approved, 3=Denied</p>
+                    <label for="reimbIdInput">Status ID Number of the Reimbursements:</label>
+                    <input type="number" id="statusIdInput"/>
+                </div>
+                <button id="getByStatusBtn" class="btn btn-outline-info">Submit</button>
+        <table class="table-hover table-bordered" id="rtable">
+            <thead>
+                <tr>
+                    <th> Reimbursement Id </th>
+                    <th> Amount ($) </th>
+                    <th> Date Submitted </th>
+                    <th> Date Resolved </th>
+                    <th> Description </th>
+                    <th> Employee </th>
+                    <th> Resolver </th>
+                    <th> Reimbursement Status </th>
+                    <th> Reimbursement Type </th>
+                </tr>
+            </thead>
+            <tbody id="rbody1">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="submitnewreim">
+        <h3 id="welcome-row" class="row justify-content-center align-items-center text-white">Squirrel Dog Enterprises</h3>
+        <h3 id="welcome2-row" class="row justify-content-center align-items-center text-white">Employee New Reimbursement Request Form</h3>
+        <div class="container align-items-center">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <div id="login-form" class="form" action="" method="post">
+                            <h5 class="text-center text-info">Please complete the following:</h5>
+                            <div id="newreq-text" class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span  class="input-group-text text-info">Amount Requested: $</span>
+                                </div>
+                                  <input id="amount" type="number" step=.01 class="form-control">
+                            </div>
+                            <div id="rtype" class="text-center text-info rtype">
+                                <p>Select Reimbursement Type:</p>
+                                <div>
+                                  <input class="text-info" type="radio" id="reimbursementType1"
+                                   name="type" value=1>
+                                  <label for="reimbursementType1">LODGING</label>
+                              
+                                  <input class="text-info" type="radio" id="reimbursementType2"
+                                   name="type" value=2>
+                                  <label for="reimbursementType2">TRAVEL</label>
+                              
+                                  <input class="text-info" type="radio" id="reimbursementType3"
+                                   name="type" value=3>
+                                  <label for="reimbursementType3">FOOD</label>
+
+                                  <input class="text-info" type="radio" id="reimbursementType4"
+                                   name="type" value=4>
+                                  <label for="reimbursementType4">OTHER</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="textarea" class="text-info">Brief description for Request:</label>
+                                <textarea class="form-control" id="description" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input id="submitnewrequest" onsubmit="document.getElementById('newreqform').style.display = 'none'" type="submit" name="submit" style="width:100%" class="btn btn-info btn-md" value="submit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br>
-        <br>
-        <div class="form-group row-2">
-          <div class="col-sm-10">
-            <button id= "rtablebtn" type="submit" class="btn btn-primary">SUBMIT</button>
-          </div>
+    </div>
     </main>
     
     

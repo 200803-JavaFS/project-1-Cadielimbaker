@@ -14,33 +14,39 @@ public class UsersService {
 	
 	private static IUsersDAO udao = new UsersDAO();
 	private static IUserRolesDAO urdao = new UserRolesDAO();
-	private static final Logger log = LogManager.getLogger(UsersService.class); //WOULD LIKE TO FIGURE OUT HOW TO IMPLEMENT LOGGING
+	private static final Logger log = LogManager.getLogger(UsersService.class); 
 	
-	//might need to add List<Users> list = udao.findAllUsers(); then return list;
+	
 	public List<Users> findAllUsers() {
+		log.info("Finding all users");
 		return udao.findAllUsers();
 		
 	}
 	
 	public Users findByUsersId(int usersId) {
+		log.info("Getting a user by usersId");
 		return udao.selectByUsersId(usersId);
 		
 	}
 	
 	public Users addUsers(Users u) {
+		log.info("Add user");
 		return udao.insert(u);
 	}
 
 	public UserRoles findByUserRoleId(int userRoleId) {
+		log.info("Getting user roles by userRoleId");
 		return urdao.selectByUserRole(userRoleId);
 	}
 
 	public UserRoles addUserRoles(UserRoles userRole) {
+		log.info("Adding a user role");
 		urdao.addUserRoles(userRole);
 		return null;
 	}
 		
 	public Users selectByUsername(String userName) {
+		log.info("Finding user by userName");
 		return udao.selectByUserName(userName);
 	}
 

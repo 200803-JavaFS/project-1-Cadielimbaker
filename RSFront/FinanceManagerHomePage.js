@@ -1,199 +1,301 @@
 const url = "http://localhost:8080/project1/";
-var currentreimbursement = document.getElementById("reimbursement").value;
-var addreimbursement = document.getElementById("addreimbursementbtn");
-var updatedRiembStatus;
-// var reimbstatusid = document.getElementById("reimbstatus").value;
-// console.log(reimbstatusid);
-// document.getElementById("rtablebtn").addEventListener("click", findallreimbursementstatusFunc);
 
+document.getElementById("findfuncbtn").addEventListener("click", findAllFunc);
+document.getElementById("findfuncbtn1").addEventListener("click", findByStatusFunc);
+document.getElementById("findfuncbtn2").addEventListener("click", findByEmployeeFunc);
+document.getElementById("findfuncbtn3").addEventListener("click", updateFunc());
 
-// async function findallreimbursementstatusFunc() {
+async function findAllFunc() {
+    console.log("@findAllFunc");
 
-//     document.getElementById("rbody").innerText ="";
+    document.getElementById("rbody").innerText = "";
 
-//     let resp = await fetch(url + "reimbursement/" + "findallreimbursementstatus/" + reimbstatusid, {
-//         method: 'GET',
-//         credentials: 'include'
-//     });
-//     console.log(resp);
-//     let data = await resp.json();
-//     console.log(data);
-//     //reimbstatusid = data.reimbStatusId;
-
-//     if (resp.status === 200) {
-//         //let data = await resp.json();
-//         for (let reimbursement of data) {
-//             console.log(reimbursement);
-//             let row = document.createElement("tr");
-//             let cell1 = document.createElement("td");
-//             cell.innerHTML = reimbursement.reimbId;
-//             row.appendChild(cell1);
-//             let cell2 = document.createElement("td");
-//             cell2.innerHTML = reimbursement.reimbAmount;
-//             row.appendChild(cell2);
-//             let cell3 = document.createElement("td");
-//             cell3.innerHTML = reimbursement.reimbDescription;
-//             row.appendChild(cell3);
-//             let cell4 = document.createElement("td");
-//             cell4.innerHTML = reimbursement.reimbAuthor;
-//             row.appendChild(cell4);
-//             let cell5 = document.createElement("td");
-//             cell5.innerHTML = reimbursement.reimbResolver;
-//             row.appendChild(cell5);
-//             let cell6 = document.createElement("td");
-//             switch (reimbursement.reimbStatusId) {
-//                 case 1:
-//                     cell4.innerHTML = "PENDING";
-//                     break;
-//                 case 2:
-//                     cell4.innerHTML = "APPROVED";
-//                     break;
-//                 case 3:
-//                     cell4.innerHTML = "DENIED";
-//                     break;
-//             }
-//             row.appendChild(cell6);
-//             let cell7 = document.createElement("td");
-//             switch (reimbursement.reimbTypeId) {
-//                 case 1:
-//                     cell4.innerHTML = "LODGING";
-//                     break;
-//                 case 2:
-//                     cell4.innerHTML = "TRAVEL";
-//                     break;
-//                 case 3:
-//                     cell4.innerHTML = "FOOD";
-//                     break;
-//                 case 4:
-//                     cell4.innerHTML = "OTHER";
-//                     break;
-//             }
-//             row.appendChild(cell7);
-           
-//             document.getElementById("rbody").appendChild(row);
-//         }
-//     }
+    let resp = await fetch(url+"reimbursement" , {
+        credentials: 'include'
     
-    //document.getElementById("rtablebtn").addEventListener("click", findAllFunc);
-
-    async function findAllFunc() {
-
-    document.getElementById("reimbursement").innerText ="";
-    document.getElementById("rtablebtn").addEventListener("click", findAllFunc);
-
-    
-    let resp = await fetch(url + "reimbursement/", {
-        method: 'GET',
-        credentials: "include",
     });
 
-    console.log(reimbursement);
-    let row = document.createElement("tr");
-    let cell1 = document.createElement("td");
-    cell.innerHTML = reimbursement.reimbId;
-    row.appendChild(cell1);
-    let cell2 = document.createElement("td");
-    cell2.innerHTML = reimbursement.reimbAmount;
-    row.appendChild(cell2);
-    let cell3 = document.createElement("td");
-    cell3.innerHTML = reimbursement.reimbDescription;
-    row.appendChild(cell3);
-    let cell4 = document.createElement("td");
-    cell4.innerHTML = reimbursement.reimbAuthor;
-    row.appendChild(cell4);
-    let cell5 = document.createElement("td");
-    cell5.innerHTML = reimbursement.reimbResolver;
-    row.appendChild(cell5);
-    let cell6 = document.createElement("td");
-    switch (reimbursement.reimbStatusId) {
-        case 1:
-            cell4.innerHTML = "PENDING";
-            break;
-        case 2:
-            cell4.innerHTML = "APPROVED";
-            break;
-        case 3:
-            cell4.innerHTML = "DENIED";
-            break;
-    }
-    row.appendChild(cell6);
-    let cell7 = document.createElement("td");
-    switch (reimbursement.reimbTypeId) {
-        case 1:
-            cell4.innerHTML = "LODGING";
-            break;
-        case 2:
-            cell4.innerHTML = "TRAVEL";
-            break;
-        case 3:
-            cell4.innerHTML = "FOOD";
-            break;
-        case 4:
-            cell4.innerHTML = "OTHER";
-            break;
-    }
-    row.appendChild(cell7);
-   
-    document.getElementById("rbody").appendChild(row);
-}
-
-
-async function AddFunc(){
-    //document.getElementById("addreimbursementbtn").addEventListener("click", AddFunc);
-    let sName = document.getElementById("supName").value;
-    let sPower = document.getElementById("supPower").value;
-    let fName = document.getElementById("fName").value;
-    let lName = document.getElementById("lName").value;
-    let pLevel = document.getElementById("pLevel").value;
-    let home = document.getElementById("home").value;
-
-    let avenger = {
-        supName : sName,
-        supPower : sPower,
-        firstName : fName,
-        lastName : lName,
-        powerLevel : pLevel,
-        homeString : home 
-    }
-
-    console.log(reimbursement)
-
-    let resp = await fetch(url + "reimbursement/", {
-        method: 'POST',
-        body: JSON.stringify(reimbursement),
-        credentials: "include"
-    })
-
-    if(resp.status === 200){
-        findAllFunc()
-    } else {
-        document.getElementById("rtable").innerText = "Reimbursement could not be added.";
-    }
-
-    function approveReimbFunc() {
-        updateReimbFunc(2);
-    }
-    
-    function denyReimbFunc() {
-        updateReimbFunc(3);
-    }
-    async function updateReimbFunc(newStatus) {
-        let reimburement = {
-            //add all the stuff from the form
-            reimbId: currentReimb.reimbId,
-            reimbStatusId: updatedRiembStatus,
-            reimbResolver: userId   
+    if(resp.status===200){
+        let data = await resp.json();
+        for (let reimbursement of data){
+            console.log(reimbursement);
+            let row = document.createElement("tr");
+            let cell = document.createElement("td");
+            cell.innerHTML = reimbursement.reimbId;
+            row.appendChild(cell);
+            let cell2 = document.createElement("td");
+            cell2.innerHTML = reimbursement.amount;
+            row.appendChild(cell2);
+            let cell3 = document.createElement("td");
+            cell3.innerHTML =reimbursement.submitted;
+            row.appendChild(cell3);
+            if (reimbursement.resolved != null){
+                let cell4 = document.createElement("td");
+                cell4.innerHTML = reimbursement.resolved;
+                row.appendChild(cell4);
+            } else {
+                let cell4 = document.createElement("td");
+                row.appendChild(cell4);
+            }
+            let cell5 = document.createElement("td");
+            cell5.innerHTML = reimbursement.description;
+            row.appendChild(cell5);
+            let cell6 = document.createElement("td");
+            cell6.innerHTML = reimbursement.author.userId;
+            row.appendChild(cell6);
+            if (reimbursement.resolver != null){
+                let cell7 = document.createElement("td");
+                cell7.innerHTML = reimbursement.resolver.userId;
+                row.appendChild(cell7);
+            } else {
+                let cell7 = document.createElement("td");
+                row.appendChild(cell7);
+            }
+            let cell8 = document.createElement("td");
+                switch (reimbursement.statusId.statusId) {
+                   
+                    /*
+                        case 1:
+                        cell8innerText = "Pending";
+                        row.appendChild(cell8);
+                        break;
+                    */
+                    case 2:
+                        cell8.innerText = "Approved";
+                        row.appendChild(cell8);
+                        break;
+                    case 3:
+                        cell8.innerText = "Denied";
+                        row.appendChild(cell8);
+                        break;
+                    default:
+                        cell8innerText = "Pending";
+                        row.appendChild(cell8);
+                        break;
+                }
+                row.appendChild(cell8);          
+            let cell9 = document.createElement("td");
+                switch (reimbursement.typeId.typeId) {
+                    case 1:
+                        cell9.innerText = "Lodging";
+                        break;
+                    case 2:
+                        cell9.innerText = "Travel";
+                        break;
+                    case 3:
+                        cell9.innerText = "Food";
+                        break;
+                    case 4:
+                        cell9.innerText = "Other";
+                    break;
+                }
+            row.appendChild(cell9);
+            document.getElementById("rbody").appendChild(row);
         }
-        let resp = await fetch(url + "reimb", {
-            method: 'PUT',
-            body: JSON.stringify(reimb),
-            credentials: 'include'
-        });
+    }
+}
+async function findByStatusFunc(){
+    console.log("@findByStatusFunc");
+
+    document.getElementById("rbody1").innerText = "";
+
+    let rStatus = document.getElementById("statusIdInput");
+    let rsId = rStatus.value;
+    console.log("rsId = " + rsId);
+
+    let resp = await fetch(url+"reimbursementsbystatus" + "/" + rsId , {
+        credentials: 'include'
     
-        if (resp.status === 202) {
-            resultText.innerText = "Reimbursement updated successfully"
-        } else {
-            resultText.innerText = "Failed to update reimbursement"
+    });
+
+        if(resp.status===200){
+            let data = await resp.json();
+            for (let reimbursement of data){
+                console.log(reimbursement);
+                let row = document.createElement("tr");
+                let cell = document.createElement("td");
+                cell.innerHTML = reimbursement.reimbId;
+                row.appendChild(cell);
+                let cell2 = document.createElement("td");
+                cell2.innerHTML = reimbursement.amount;
+                row.appendChild(cell2);
+                let cell3 = document.createElement("td");
+                cell3.innerHTML =reimbursement.submitted;
+                row.appendChild(cell3);
+                if (reimbursement.resolved != null){
+                    let cell4 = document.createElement("td");
+                    cell4.innerHTML = reimbursement.resolved;
+                    row.appendChild(cell4);
+                } else {
+                    let cell4 = document.createElement("td");
+                    row.appendChild(cell4);
+                }
+                let cell5 = document.createElement("td");
+                cell5.innerHTML = reimbursement.description;
+                row.appendChild(cell5);
+                let cell6 = document.createElement("td");
+                cell6.innerHTML = reimbursement.author.userId;
+                row.appendChild(cell6);
+                if (reimbursement.resolver != null){
+                    let cell7 = document.createElement("td");
+                    cell7.innerHTML = reimbursement.resolver.userId;
+                    row.appendChild(cell7);
+                } else {
+                    let cell7 = document.createElement("td");
+                    row.appendChild(cell7);
+                }
+                let cell8 = document.createElement("td");
+                    switch (reimbursement.statusId.statusId) {
+                        case 1:
+                            cell8innerText = "Pending";
+                            row.appendChild(cell8);
+                            break;
+                        case 2:
+                            cell8.innerText = "Approved";
+                            row.appendChild(cell8);
+                            break;
+                        case 3:
+                            cell8.innerText = "Denied";
+                            row.appendChild(cell8);
+                            break;
+                    }
+                    row.appendChild(cell8);          
+                let cell9 = document.createElement("td");
+                    switch (reimbursement.typeId.typeId) {
+                        case 1:
+                            cell9.innerText = "Lodging";
+                            break;
+                        case 2:
+                            cell9.innerText = "Travel";
+                            break;
+                        case 3:
+                            cell9.innerText = "Food";
+                            break;
+                        case 4:
+                            cell9.innerText = "Other";
+                        break;
+                    }
+                row.appendChild(cell9);
+                document.getElementById("rbody1").appendChild(row);
+            }
         }
-}
-}
+    }
+
+    async function findByEmployeeFunc(){
+        console.log("@findEmployeeFunc");
+
+    document.getElementById("rbody2").innerText = "";
+
+    let employee = document.getElementById("empIdInput");
+    let empId = employee.value;
+    console.log("empId = " + empId);
+
+    let resp = await fetch(url+"reimbursementsbyemployee" + "/" + empId  , {
+        credentials: 'include'
+    
+    });
+
+        if(resp.status===200){
+            let data = await resp.json();
+            for (let reimbursement of data){
+                console.log(reimbursement);
+                let row = document.createElement("tr");
+                let cell = document.createElement("td");
+                cell.innerHTML = reimbursement.reimbId;
+                row.appendChild(cell);
+                let cell2 = document.createElement("td");
+                cell2.innerHTML = reimbursement.amount;
+                row.appendChild(cell2);
+                let cell3 = document.createElement("td");
+                cell3.innerHTML =reimbursement.submitted;
+                row.appendChild(cell3);
+                if (reimbursement.resolved != null){
+                    let cell4 = document.createElement("td");
+                    cell4.innerHTML = reimbursement.resolved;
+                    row.appendChild(cell4);
+                } else {
+                    let cell4 = document.createElement("td");
+                    row.appendChild(cell4);
+                }
+                let cell5 = document.createElement("td");
+                cell5.innerHTML = reimbursement.description;
+                row.appendChild(cell5);
+                let cell6 = document.createElement("td");
+                cell6.innerHTML = reimbursement.author.userId;
+                row.appendChild(cell6);
+                if (reimbursement.resolver != null){
+                    let cell7 = document.createElement("td");
+                    cell7.innerHTML = reimbursement.resolver.userId;
+                    row.appendChild(cell7);
+                } else {
+                    let cell7 = document.createElement("td");
+                    row.appendChild(cell7);
+                }
+                let cell8 = document.createElement("td");
+                    switch (reimbursement.statusId.statusId) {
+                        case 1:
+                            cell8innerText = "Pending";
+                            row.appendChild(cell8);
+                            break;
+                        case 2:
+                            cell8.innerText = "Approved";
+                            row.appendChild(cell8);
+                            break;
+                        case 3:
+                            cell8.innerText = "Denied";
+                            row.appendChild(cell8);
+                            break;
+                    }
+                    row.appendChild(cell8);          
+                let cell9 = document.createElement("td");
+                    switch (reimbursement.typeId.typeId) {
+                        case 1:
+                            cell9.innerText = "Lodging";
+                            break;
+                        case 2:
+                            cell9.innerText = "Travel";
+                            break;
+                        case 3:
+                            cell9.innerText = "Food";
+                            break;
+                        case 4:
+                            cell9.innerText = "Other";
+                        break;
+                    }
+                row.appendChild(cell9);
+                document.getElementById("rbody1").appendChild(row);
+            }
+        }
+
+        async function updateFunc(){
+
+            let rID = document.getElementById("reimbIdInput");
+            let rId = rID.value;
+        
+            const rSArr = document.querySelectorAll('input[name="status"]');
+            let sId;
+            for (const sId of rSArr) {
+                if (sId.checked) {
+                    sId = rSArr.value;
+                    break;
+                }
+            }
+        
+            let rStatus = {
+                reimbId: rId,
+                statusId: sId
+            }
+        
+            let resp = await fetch(url+"changestatus" + "/" + rId, {
+                method: 'POST',
+                body: JSON.stringify(rStatus),
+                credentials: "include"
+            });
+        
+            if(resp.status===202) {
+                document.getElementById("updateSuccess").innerHTML = "Reimbursement update successful";
+            } else {
+                document.getElementById("updateSuccess").innerHTML = "Reimbursement update failure";
+            }
+        }
+    }

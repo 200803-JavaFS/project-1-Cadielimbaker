@@ -11,214 +11,116 @@
 <body>
     <main class="container">
       
-        <h3>Add Reimbursement</h3>
-        <div>
-          <div class="form-group row">
-            <label for="inputreimbAuthor" class="col-sm-3 col-form-label">UserID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="reimbAuthor" placeholder="UserID">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="inputdescription" class="col-sm-3 col-form-label"> Description</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="reimbDescription" placeholder="Description">
-            </div>
-            <div class="form-group row">
-              <label for="inputamount" class="col-sm-3 col-form-label"> Amount</label>
-              <div class="col-sm-10">
-                <input type="number" class="form-control" id="reimbAmount" placeholder="Amount">
-              </div>
-          </div>
-        </div>
-          <div class="row">
-            <div class="col-6">
-          <fieldset class="form-group">
-            <div class="row">
-              <legend class="col-form-label col-sm-2 pt-0">Type</legend>
-              <div class="col-sm-10">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="LODGING" value="option1" checked>
-                  <label class="form-check-label" for="reimbType">
-                    LODGING
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="TRAVEL" value="option2">
-                  <label class="form-check-label" for="reimbType">
-                    TRAVEL
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="FOOD" value="option3">
-                  <label class="form-check-label" for="reimbType">
-                    FOOD
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="OTHER" value="option4">
-                  <label class="form-check-label" for="reimbType">
-                    OTHER
-                  </label>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-      </div>
-          <div class="form-group row">
-            <div class="col-sm-1">Status</div>
-            <div class="col-sm-10">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck1">
-                <label class="form-check-label" for="gridCheck1">
-                  PENDING
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-10">
-              <button type="submit" id="addreimbursementbtn" class="btn btn-primary">SUBMIT</button>
-            </div>
-          </div>
-        </form>
-    
-
-    <area class="content row" id="reimbursementUpdate">
-    <h3>Update Reimbursement</h3>
-        <form>
-          <div class="form-group row">
-            <label for="inputreimbResolver" class="col-sm-3 col-form-label">UserID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="reimbResolver" placeholder="UserID">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="inputreimbId" class="col-sm-3 col-form-label">ReimbID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="reimbId" placeholder="ReimbID">
-            </div>
-          </div>
-      
-          <div class="row">
-            <div class="col-6">
-          <fieldset class="form-group">
-            <div class="row">
-              <legend class="col-form-label col-sm-2 pt-0">Type</legend>
-              <div class="col-sm-10">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="LODGING" value="option1" checked>
-                  <label class="form-check-label" for="reimbType">
-                    LODGING
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="TRAVEL" value="option2">
-                  <label class="form-check-label" for="reimbType">
-                    TRAVEL
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="FOOD" value="option3">
-                  <label class="form-check-label" for="reimbType">
-                    FOOD
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="OTHER" value="option4">
-                  <label class="form-check-label" for="reimbType">
-                    OTHER
-                  </label>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-      </div>
-          <div class="form-group row">
-            <div class="col-sm-1">Status</div>
-            <div class="col-sm-10">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadio1" id="gridRadio1">
-                <label class="form-check-label" for="gridCheck1">
-                  APPROVED
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadio1" id="gridRadios2">
-                <label class="form-check-label" for="gridCheck2">
-                  DENIED
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-10">
-              <button type="submit" class="btn btn-primary">SUBMIT</button>
-            </div>
-          </div>
-        </div>
-      </area>
-      <br>
-      <br>
-      <div class="container">
+      <div id="findfunc" class="container">
+  
+            <h3>Finance Manager</h3>
+        </header>
         <div class="row" id="table-row">
-            <table class="table-hover table-bordered" id="rtable">
-                <thead>
-                    <tr>
-                        <th>reimbId</th>
-                        <th>reimbAmount</th>
-                        <th>reimbDescription</th>
-                        <th>reimbAuthor</th>
-                        <th>reimbResolver</th>
-                        <th>reimbStatusId</th>
-                        <th>reimbTypeId</th>
-                    </tr>
-                </thead>
-                <tbody id="rbody">
-                </tbody>
-            </table>
+            <div class="col">
+                <h3>View All</h3>
+                <button id="findfuncbtn"  class="btn">List All Reimbursements</button>
+            </div>
+            <div class="col">
+                <button id="findfuncbtn1" type = "submit" class="btn">View Reimbursements By Status</button>
+            </div>
+            <div class="col">
+                <button id="findfuncbtn2" type="submit" class="btn">View By Employee</button>
+            </div>
+            <div class="col">
+                <button id="findfuncbtn3" type="submit" class="btn">Update Reimbursement Status</button>
+            </div>
+        <table class="table-hover table-bordered" id="rtable">
+            <thead>
+                <tr>
+                    <th> Reimbursement Id </th>
+                    <th> Amount ($) </th>
+                    <th> Date Submitted </th>
+                    <th> Date Resolved </th>
+                    <th> Description </th>
+                    <th> Employee Id </th>
+                    <th> Resolver </th>
+                    <th> Reimbursement Status </th>
+                    <th> Reimbursement Type </th>
+                </tr>
+            </thead>
+            <tbody id="rbody">
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <div class="row" id="table-row">
+            <h3>View By Status</h3>
+                <div class="form-group">
+                    <p>1=Pending, 2=Approved, 3=Denied</p>
+                    <label for="reimbIdInput">Status ID Number of the Reimbursements:</label>
+                    <input type="number" id="statusIdInput"/>
+                </div>
+                <button id="getByStatusBtn" class="btn btn-outline-info">Submit</button>
+        <table class="table-hover table-bordered" id="rtable">
+            <thead>
+                <tr>
+                    <th> Reimbursement Id </th>
+                    <th> Amount ($) </th>
+                    <th> Date Submitted </th>
+                    <th> Date Resolved </th>
+                    <th> Description </th>
+                    <th> Employee </th>
+                    <th> Resolver </th>
+                    <th> Reimbursement Status </th>
+                    <th> Reimbursement Type </th>
+                </tr>
+            </thead>
+            <tbody id="rbody1">
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div class="row" id="table-row">
+        <h3>View By Employee</h3>
+            <div class="form-group">
+                <label for="empIdInput">Employee ID:</label>
+                <input type="number" id="empIdInput"/>
+            </div>
+            <button id="EmpBtnInput" class="btn btn-outline-info">Submit</button>
+    <table class="table-hover table-bordered" id="rtable">
+        <thead>
+            <tr>
+                <th> Reimbursement Id </th>
+                <th> Amount ($) </th>
+                <th> Date Submitted </th>
+                <th> Date Resolved </th>
+                <th> Description </th>
+                <th> Employee </th>
+                <th> Resolver </th>
+                <th> Reimbursement Status </th>
+                <th> Reimbursement Type </th>
+            </tr>
+        </thead>
+        <tbody id="rbody2">
+        </tbody>
+    </table>
+    </div>
+    <br>
+    <div class="row" id="updateStatusForm">
+        <div class="col">
+            <h3>Update Status</h3>
+            <div class="form-group">
+                <label for="reimbIdInput">Reimburement ID to approve/deny:</label>
+                <input type="number" id="reimbIdInput"/>
+            </div>
+            <div class="form-group">
+                <input type="radio" id="approved" name="status" value="approved">
+                <label for="approved">If Approved change status to 2</label><br>
+                <input type="radio" id="denied" name="status" value="denied">
+                <label for="denied">If Denied change status to 3</label>
+            </div>
+            <button id="updateStatusBtn" class="btn btn-outline-success">Update</button>
+            <h6 id="updateSuccess"></h6>
         </div>
-        <br>
-        <br>
-        <div class="form-group row-2">
-          <div class="col-sm-10">
-            <button id= "rtablebtn" type="submit" class="btn btn-primary">View All Reimbursements</button>
-          </div>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioPending" value="1">
-            <label class="form-check-label" for="inlineRadio1">PENDING</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioApproved" value="2">
-            <label class="form-check-label" for="inlineRadio2">APPROVED</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioDenied" value="3">
-            <label class="form-check-label" for="inlineRadio3">DENIED</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioLodging" value="1">
-            <label class="form-check-label" for="inlineRadio1">LODGING</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioTravel" value="2">
-            <label class="form-check-label" for="inlineRadio2">TRAVEL</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioFood" value="3">
-            <label class="form-check-label" for="inlineRadio3">FOOD</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioOther" value="4">
-            <label class="form-check-label" for="inlineRadio3">OTHER</label>
-          </div>
-      
+    </div>
     </main>
     
-    
+    <script src="Login2.js"></script>
     <script src="FinanceManagerHomePage.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

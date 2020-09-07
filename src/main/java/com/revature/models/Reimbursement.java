@@ -45,7 +45,7 @@ public class Reimbursement implements Serializable {
 	@Column(name="Reimb_Description")
 	private String reimbDescription;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Reimb_Author_FK", referencedColumnName="Ers_Users_ID", nullable=false)
 	private Users reimbAuthor;
 	
@@ -53,7 +53,7 @@ public class Reimbursement implements Serializable {
 	@JoinColumn(name="Reimb_Resolver_FK", referencedColumnName="Ers_Users_ID")
 	private Users reimbResolver;	//OneToOne with Ers_Users_ID
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Reim_Status_ID_FK", referencedColumnName="Reimb_Status_ID", nullable=false)
 	private ReimbursementStatus reimbStatusId;	//connect to reimbursement status table
 	
