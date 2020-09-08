@@ -10,14 +10,13 @@
 </head>
 <body>
     <main class="container">
+        
       
       <div id="findfunc" class="container">
-  
-            <h3>Finance Manager</h3>
         </header>
+        
         <div class="row" id="table-row">
             <div class="col">
-                <h3>View All</h3>
                 <button id="findfuncbtn4"  class="btn">List All Reimbursements</button>
             </div>
             <div class="col">
@@ -32,6 +31,7 @@
           </div>
           <button id="findfuncbtn8" type="submit" class="btn">Logout</button>
       </div>
+      <div class="row" id="table-row">
         <table class="table-hover table-bordered" id="rtable">
             <thead>
                 <tr>
@@ -51,19 +51,20 @@
         </table>
         <br>
         <br>
+   
         <div class="row" id="table-row">
-            <h3>View By Status</h3>
+            
                 <div class="form-group">
                     <p>1=PENDING, 2=APPROVED, 3=DENIED</p>
                     <label for="reimbIdInput">Status ID Number of the Reimbursements:</label>
                     <input type="number" id="statusIdInput"/>
                 </div>
-                <button id="getByStatusBtn" class="btn btn-outline-info">Submit</button>
+                <button id="getByStatusBtn" class="btn btn-primary">Submit</button>
         <table class="table-hover table-bordered" id="rtable">
             <thead>
                 <tr>
                     <th> Reimbursement Id </th>
-                    <th> Amount ($) </th>
+                    <th> Amount</th>
                     <th> Date Submitted </th>
                     <th> Date Resolved </th>
                     <th> Description </th>
@@ -78,13 +79,13 @@
         </table>
     </div>
     <br>
-    <div class="row" id="table-row">
-        <h3>View By Employee</h3>
+    <div class="row" id="table-row"></div>
+        
             <div class="form-group">
                 <label for="empIdInput">Employee ID:</label>
                 <input type="number" id="empIdInput"/>
             </div>
-            <button id="EmpBtnInput" class="btn btn-outline-info">Submit</button>
+            <button id="EmpBtnInput" class="btn btn-primary">Submit</button>
     <table class="table-hover table-bordered" id="rtable">
         <thead>
             <tr>
@@ -104,9 +105,10 @@
     </table>
     </div>
     <br>
+    <br>
     <div class="row" id="updateStatusForm">
         <div class="col">
-            <h3>Update Status</h3>
+           
             <div class="form-group">
                 <label for="reimbIdInput">Reimburement ID to APPROVE/DENY:</label>
                 <input type="number" id="reimbIdInput"/>

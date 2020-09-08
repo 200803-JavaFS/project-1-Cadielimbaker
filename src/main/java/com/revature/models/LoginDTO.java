@@ -4,7 +4,7 @@ public class LoginDTO {
 	
 	public String userName;
 	public String password;
-	public String userRole;
-	public int userRoleId;
+	//public String userRole;
+	//public int userRoleId;
 
 }

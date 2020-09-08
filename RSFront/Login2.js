@@ -19,25 +19,26 @@ async function loginFunc(){
         body: JSON.stringify(user),
         credentials: "include"
     });
-    
-console.log(resp);
+
     if(resp.status===200){
-        document.getElementById("login-row").innerText = "YOU HAVE LOGGED IN.";
-        let data = await resp.json();  
+        document.getElementById("login-row").innerText = "YOU HAVE LOGGED IN";
         
-        console.log(data); 
+       let data = await resp.text();
+        console.log(data);
         let uRId = data;
         sessionStorage.setItem("uRId",uRId);
-        
-        if (uRId == 1) {
-            window.location.href = "EmployeeHomePage.html";
+        console.log("URId" + uRId);
+        if (uRId == 'Employee') {
+            console.log("employee page");
+            window.location.href = 'EmployeeHomePage.html';
 
-        } else if (uRId == 2) {
-            
-            window.location.href = "FinanceManagerHomePage.html";
-           
-    
+        } else if (uRId == 'Finance Manager') {
+            console.log("finance manager page");
+            window.location.href = 'FinanceManagerHomePage.html';
         }
-}   }
-
+    } else {
+        document.getElementById("login-row").innerText = "Login Failed";
+    }
+    //hey
+}
 

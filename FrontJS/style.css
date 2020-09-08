@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #371168;
+    height: 100vh;
+}
+
+#welcome-row {
+    margin-top: 100px;
+}
+
+#login .container #login-row #login-column #login-box {
+    margin-top: 50px;
+    max-width: 650px;
+    height: 400px;
+    border: 1px solid #949393;
+    background-color: #EAEAEA;
+}
+
+#form-group {
+    margin-top: 200px;
+}
+
+#login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+}
+
+#login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+}
+
+#login #employee {
+    margin: 50px 100px;
+}
+
+#buttons-top {
+    margin-top: 20px 30px 0px 20px;
+}
+
+#status {
+    margin: 5px;
+}
+
+#submitnewreim .container #login-row #login-column #login-box {
+    margin-top: 50px;
+    max-width: 650px;
+    height: 400px;
+    border: 1px solid #a7a3a3;
+    background-color: #EAEAEA;
+}
+
+#form-group {
+    margin-top: 200px;
+}
+
+#submitnewreim .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+}
+
+#submitnewreim .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+}
+
+#pad {
+    margin-top: 0px;
+}
+
+#statusIdInput {
+    margin-bottom: 0px;
+}
+
+

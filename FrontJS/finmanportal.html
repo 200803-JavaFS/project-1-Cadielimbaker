@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" id="bootstrap-css">
+   <link rel="stylesheet" href="style.css">
+    <title>Finanace Manager Access Page</title>
+
+</head>
+
+<body>
+    <div id="findfunc4" class="container employee">
+        <h2 id="welcome-row" class="row justify-content-center align-items-center text-white">Welcome to Squirrel Dog Enterprises</h2>
+        <h2 id="welcome-row2" class="row justify-content-center align-items-center text-white">Finance Manager Reimbursement Portal</h2>
+        <div class="row justify-content-center align-items-center" id="table-row">
+            <div class="row" id="buttons-top" >
+                <button id="findfuncbtn4"  type= "submit" class="btn btn-secondary btn-md"> View All Reimbursements</button>
+                <button id="findfuncbtn5" type = "submit" class="btn btn-secondary btn-md">View By Status</button>
+                <button id="findfuncbtn6" type="submit" class="btn btn-secondary btn-md">View By Employee</button>
+                <button id="findfuncbtn7" type="submit" class="btn btn-secondary btn-md">Update Reimbursement</button>\
+                <button id="findfuncbtn8" type="submit" class="btn btn-secondary btn-md">Logout</button>
+            </div>
+        </div>
+            <div id="status" class="row justify-content-center align-items-center">
+                <div id="status" class="row justify-content-center align-items-center">
+                    <div class="form-group form-info justify-content-center align-items-center ">
+                        <div class="row input-group mb-3">
+                                <div id ="pad" class="input-group-prepend">
+                                    <span  class="input-group-text text-info">1.Pending, 2.Approved, or 3.Denied:</span>
+                                    
+                                </div>
+                                    <input id="statusIdInput" type="number" class="form-control">
+                        </div>
+                        <button id="getByStatusBtn" class="btn btn-outline-info">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="status" class="row justify-content-center align-items-center">
+                    <div class="form-group form-info justify-content-center align-items-center ">
+                        <div class="row input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span  class="input-group-text text-info">Employee Id:</span>     
+                                </div>
+                                    <input id="empIdInput" type="number" class="form-control">
+                                <div>
+                                    <button id="EmpBtnInput" class="btn btn-outline-info">Submit</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped" id="rtable">
+            <thead class="thead-dark">
+                <tr>
+                    <th> R Id </th>
+                    <th> Amount ($) </th>
+                    <th> Submitted </th>
+                    <th> Resolved </th>
+                    <th> Description </th>
+                    <th> Employee Id </th>
+                    <th> Resolver </th>
+                    <th> R Status </th>
+                    <th> RType </th>
+                </tr>
+            </thead>
+            <tbody id="rbody">
+            </tbody>
+        </table>
+        <br>
+        <br>
+        
+        <table class="table table-striped" id="rtable">
+            <thead class="thead-dark">
+                <tr>
+                    <th> R Id </th>
+                    <th> Amount ($) </th>
+                    <th> Submitted </th>
+                    <th> Resolved </th>
+                    <th> Description </th>
+                    <th> Employee Id </th>
+                    <th> Resolver </th>
+                    <th> R Status </th>
+                    <th> RType </th>>
+                </tr>
+            </thead>
+            <tbody id="rbody1">
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div class="row" id="table-row">
+            <table class="table table-striped" id="rtable">
+                <thead class="thead-dark">
+            <tr>
+                <th> R Id </th>
+                    <th> Amount ($) </th>
+                    <th> Submitted </th>
+                    <th> Resolved </th>
+                    <th> Description </th>
+                    <th> Employee Id </th>
+                    <th> Resolver </th>
+                    <th> R Status </th>
+                    <th> RType </th>>
+            </tr>
+        </thead>
+        <tbody id="rbody2">
+        </tbody>
+    </table>
+    </div>
+    <br>
+    <div id="updateform" class="row" id="updateStatusForm">
+        <div class="col">
+            <h3>Update Status</h3>
+            <div class="form-group">
+                <label for="reimbIdInput">Reimburement ID to approve/deny:</label>
+                <input type="number" id="reimbIdInput"/>
+            </div>
+            <div class="form-group">
+                <input type="radio" id="approved" name="status" value="approved">
+                <label for="approved">If Approved change status to 2</label><br>
+                <input type="radio" id="denied" name="status" value="denied">
+                <label for="denied">If Denied change status to 3</label>
+            </div>
+            <button id="updateStatusBtn" class="btn btn-outline-success">Update</button>
+            <h6 id="updateSuccess"></h6>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js "></script>
+    <script src="index.js "></script>
+    <script src="finmanportal.js "></script>
+
+</body>
+
+</html>
