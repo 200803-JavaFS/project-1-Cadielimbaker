@@ -26,7 +26,7 @@ console.log(resp);
         let data = await resp.json();  
         
         console.log(data); 
-        let uRId = data.userRoleId;
+        let uRId = data;
         sessionStorage.setItem("uRId",uRId);
         
         if (uRId == 1) {
@@ -34,13 +34,10 @@ console.log(resp);
 
         } else if (uRId == 2) {
             
-            window.location.href = "FinanceManagerHomePage.html";;
+            window.location.href = "FinanceManagerHomePage.html";
            
+    
         }
-       
-    } else {
-        document.getElementById("login-row").innerText = "LOGIN FAILED.";
-    }
-}
+}   }
 
 

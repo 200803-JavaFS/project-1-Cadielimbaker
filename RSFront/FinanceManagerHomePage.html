@@ -18,22 +18,25 @@
         <div class="row" id="table-row">
             <div class="col">
                 <h3>View All</h3>
-                <button id="findfuncbtn"  class="btn">List All Reimbursements</button>
+                <button id="findfuncbtn4"  class="btn">List All Reimbursements</button>
             </div>
             <div class="col">
-                <button id="findfuncbtn1" type = "submit" class="btn">View Reimbursements By Status</button>
+                <button id="findfuncbtn5" type = "submit" class="btn">View By Status</button>
             </div>
             <div class="col">
-                <button id="findfuncbtn2" type="submit" class="btn">View By Employee</button>
+                <button id="findfuncbtn6" type="submit" class="btn">View By Employee</button>
             </div>
             <div class="col">
-                <button id="findfuncbtn3" type="submit" class="btn">Update Reimbursement Status</button>
+                <button id="findfuncbtn7" type="submit" class="btn">Update Reimbursement Status</button>
             </div>
+          </div>
+          <button id="findfuncbtn8" type="submit" class="btn">Logout</button>
+      </div>
         <table class="table-hover table-bordered" id="rtable">
             <thead>
                 <tr>
                     <th> Reimbursement Id </th>
-                    <th> Amount ($) </th>
+                    <th> Amount </th>
                     <th> Date Submitted </th>
                     <th> Date Resolved </th>
                     <th> Description </th>
@@ -51,7 +54,7 @@
         <div class="row" id="table-row">
             <h3>View By Status</h3>
                 <div class="form-group">
-                    <p>1=Pending, 2=Approved, 3=Denied</p>
+                    <p>1=PENDING, 2=APPROVED, 3=DENIED</p>
                     <label for="reimbIdInput">Status ID Number of the Reimbursements:</label>
                     <input type="number" id="statusIdInput"/>
                 </div>
@@ -105,7 +108,7 @@
         <div class="col">
             <h3>Update Status</h3>
             <div class="form-group">
-                <label for="reimbIdInput">Reimburement ID to approve/deny:</label>
+                <label for="reimbIdInput">Reimburement ID to APPROVE/DENY:</label>
                 <input type="number" id="reimbIdInput"/>
             </div>
             <div class="form-group">

@@ -24,35 +24,35 @@ async function findAllFunc() {
             cell.innerHTML = reimbursement.reimbId;
             row.appendChild(cell);
             let cell2 = document.createElement("td");
-            cell2.innerHTML = reimbursement.amount;
+            cell2.innerHTML = reimbursement.reimbAmount;
             row.appendChild(cell2);
             let cell3 = document.createElement("td");
-            cell3.innerHTML =reimbursement.submitted;
+            cell3.innerHTML =reimbursement.reimbSubmitted;
             row.appendChild(cell3);
             if (reimbursement.resolved != null){
                 let cell4 = document.createElement("td");
-                cell4.innerHTML = reimbursement.resolved;
+                cell4.innerHTML = reimbursement.reimbResolved;
                 row.appendChild(cell4);
             } else {
                 let cell4 = document.createElement("td");
                 row.appendChild(cell4);
             }
             let cell5 = document.createElement("td");
-            cell5.innerHTML = reimbursement.description;
+            cell5.innerHTML = reimbursement.reimbDescription;
             row.appendChild(cell5);
             let cell6 = document.createElement("td");
-            cell6.innerHTML = reimbursement.author.userId;
+            cell6.innerHTML = reimbursement.reimbAuthor.usersId;
             row.appendChild(cell6);
-            if (reimbursement.resolver != null){
+            if (reimbursement.reimbResolver != null){
                 let cell7 = document.createElement("td");
-                cell7.innerHTML = reimbursement.resolver.userId;
+                cell7.innerHTML = reimbursement.reimbResolver.usersId;
                 row.appendChild(cell7);
             } else {
                 let cell7 = document.createElement("td");
                 row.appendChild(cell7);
             }
             let cell8 = document.createElement("td");
-                switch (reimbursement.statusId.statusId) {
+                switch (reimbursement.reimbStatusId.reimbStatusId) {
                    
                     /*
                         case 1:
@@ -61,32 +61,32 @@ async function findAllFunc() {
                         break;
                     */
                     case 2:
-                        cell8.innerText = "Approved";
+                        cell8.innerText = "APPROVED";
                         row.appendChild(cell8);
                         break;
                     case 3:
-                        cell8.innerText = "Denied";
+                        cell8.innerText = "DENIED";
                         row.appendChild(cell8);
                         break;
                     default:
-                        cell8innerText = "Pending";
+                        cell8innerText = "PENDING";
                         row.appendChild(cell8);
                         break;
                 }
                 row.appendChild(cell8);          
             let cell9 = document.createElement("td");
-                switch (reimbursement.typeId.typeId) {
+                switch (reimbursement.reimbTypeId.reimbTypeId) {
                     case 1:
-                        cell9.innerText = "Lodging";
+                        cell9.innerText = "LODGING";
                         break;
                     case 2:
-                        cell9.innerText = "Travel";
+                        cell9.innerText = "TRAVEL";
                         break;
                     case 3:
-                        cell9.innerText = "Food";
+                        cell9.innerText = "FOOD";
                         break;
                     case 4:
-                        cell9.innerText = "Other";
+                        cell9.innerText = "OTHER";
                     break;
                 }
             row.appendChild(cell9);
@@ -117,62 +117,62 @@ async function findByStatusFunc(){
                 cell.innerHTML = reimbursement.reimbId;
                 row.appendChild(cell);
                 let cell2 = document.createElement("td");
-                cell2.innerHTML = reimbursement.amount;
+                cell2.innerHTML = reimbursement.reimbAount;
                 row.appendChild(cell2);
                 let cell3 = document.createElement("td");
-                cell3.innerHTML =reimbursement.submitted;
+                cell3.innerHTML =reimbursement.reimbSubmitted;
                 row.appendChild(cell3);
-                if (reimbursement.resolved != null){
+                if (reimbursement.reimbResolved != null){
                     let cell4 = document.createElement("td");
-                    cell4.innerHTML = reimbursement.resolved;
+                    cell4.innerHTML = reimbursement.reimbResolved;
                     row.appendChild(cell4);
                 } else {
                     let cell4 = document.createElement("td");
                     row.appendChild(cell4);
                 }
                 let cell5 = document.createElement("td");
-                cell5.innerHTML = reimbursement.description;
+                cell5.innerHTML = reimbursement.reimbDescription;
                 row.appendChild(cell5);
                 let cell6 = document.createElement("td");
-                cell6.innerHTML = reimbursement.author.userId;
+                cell6.innerHTML = reimbursement.reimbAuthor.usersId;
                 row.appendChild(cell6);
-                if (reimbursement.resolver != null){
+                if (reimbursement.reimbResolver != null){
                     let cell7 = document.createElement("td");
-                    cell7.innerHTML = reimbursement.resolver.userId;
+                    cell7.innerHTML = reimbursement.reimbResolver.usersId;
                     row.appendChild(cell7);
                 } else {
                     let cell7 = document.createElement("td");
                     row.appendChild(cell7);
                 }
                 let cell8 = document.createElement("td");
-                    switch (reimbursement.statusId.statusId) {
+                    switch (reimbursement.reimbStatusId.reimbStatusId) {
                         case 1:
-                            cell8innerText = "Pending";
+                            cell8innerText = "PENDING";
                             row.appendChild(cell8);
                             break;
                         case 2:
-                            cell8.innerText = "Approved";
+                            cell8.innerText = "APPROVED";
                             row.appendChild(cell8);
                             break;
                         case 3:
-                            cell8.innerText = "Denied";
+                            cell8.innerText = "DENIED";
                             row.appendChild(cell8);
                             break;
                     }
                     row.appendChild(cell8);          
                 let cell9 = document.createElement("td");
-                    switch (reimbursement.typeId.typeId) {
+                    switch (reimbursement.reimbTypeId.reimbTypeId) {
                         case 1:
-                            cell9.innerText = "Lodging";
+                            cell9.innerText = "LODGING";
                             break;
                         case 2:
-                            cell9.innerText = "Travel";
+                            cell9.innerText = "TRAVEL";
                             break;
                         case 3:
-                            cell9.innerText = "Food";
+                            cell9.innerText = "FOOD";
                             break;
                         case 4:
-                            cell9.innerText = "Other";
+                            cell9.innerText = "OTHER";
                         break;
                     }
                 row.appendChild(cell9);
@@ -204,68 +204,69 @@ async function findByStatusFunc(){
                 cell.innerHTML = reimbursement.reimbId;
                 row.appendChild(cell);
                 let cell2 = document.createElement("td");
-                cell2.innerHTML = reimbursement.amount;
+                cell2.innerHTML = reimbursement.reimbAmount;
                 row.appendChild(cell2);
                 let cell3 = document.createElement("td");
-                cell3.innerHTML =reimbursement.submitted;
+                cell3.innerHTML =reimbursement.reimbSubmitted;
                 row.appendChild(cell3);
-                if (reimbursement.resolved != null){
+                if (reimbursement.reimbResolved != null){
                     let cell4 = document.createElement("td");
-                    cell4.innerHTML = reimbursement.resolved;
+                    cell4.innerHTML = reimbursement.reimbResolved;
                     row.appendChild(cell4);
                 } else {
                     let cell4 = document.createElement("td");
                     row.appendChild(cell4);
                 }
                 let cell5 = document.createElement("td");
-                cell5.innerHTML = reimbursement.description;
+                cell5.innerHTML = reimbursement.reimbDescription;
                 row.appendChild(cell5);
                 let cell6 = document.createElement("td");
-                cell6.innerHTML = reimbursement.author.userId;
+                cell6.innerHTML = reimbursement.reimbAuthor.usersId;
                 row.appendChild(cell6);
-                if (reimbursement.resolver != null){
+                if (reimbursement.reimbResolver != null){
                     let cell7 = document.createElement("td");
-                    cell7.innerHTML = reimbursement.resolver.userId;
+                    cell7.innerHTML = reimbursement.reimbResolver.usersId;
                     row.appendChild(cell7);
                 } else {
                     let cell7 = document.createElement("td");
                     row.appendChild(cell7);
                 }
                 let cell8 = document.createElement("td");
-                    switch (reimbursement.statusId.statusId) {
+                    switch (reimbursement.reimbStatusId.reimbStatusId) {
                         case 1:
                             cell8innerText = "Pending";
                             row.appendChild(cell8);
                             break;
                         case 2:
-                            cell8.innerText = "Approved";
+                            cell8.innerText = "APPROVED";
                             row.appendChild(cell8);
                             break;
                         case 3:
-                            cell8.innerText = "Denied";
+                            cell8.innerText = "DENIED";
                             row.appendChild(cell8);
                             break;
                     }
                     row.appendChild(cell8);          
                 let cell9 = document.createElement("td");
-                    switch (reimbursement.typeId.typeId) {
+                    switch (reimbursement.reimbTypeId.reimbTypeId) {
                         case 1:
-                            cell9.innerText = "Lodging";
+                            cell9.innerText = "LODGING";
                             break;
                         case 2:
-                            cell9.innerText = "Travel";
+                            cell9.innerText = "TRAVEL";
                             break;
                         case 3:
-                            cell9.innerText = "Food";
+                            cell9.innerText = "FOOD";
                             break;
                         case 4:
-                            cell9.innerText = "Other";
+                            cell9.innerText = "OTHER";
                         break;
                     }
                 row.appendChild(cell9);
                 document.getElementById("rbody1").appendChild(row);
             }
         }
+    }
 
         async function updateFunc(){
 
@@ -298,4 +299,4 @@ async function findByStatusFunc(){
                 document.getElementById("updateSuccess").innerHTML = "Reimbursement update failure";
             }
         }
-    }
+    
